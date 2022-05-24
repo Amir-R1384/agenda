@@ -6,5 +6,3 @@ export interface Config {
 	subjects: string[][]
 	days: ('c' | 'we' | 'jp' | number)[]
 }
-
-export type Lang = 'en' | 'fr'
