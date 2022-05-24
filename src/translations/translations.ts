@@ -13,7 +13,7 @@ export default {
 			ECR: 'ECR',
 			// Day types
 			c: 'Holiday',
-			jp: 'Pedagogic',
+			jp: 'Pedagogical',
 			we: 'Week-end',
 			// Other
 			day: 'Day',
@@ -34,7 +34,7 @@ export default {
 			english: 'Anglais',
 			ECR: 'ECR',
 			// Day types
-			c: 'Conjé',
+			c: 'Congé',
 			jp: 'Pédagogique',
 			we: 'Fin de semaine',
 			// Other
