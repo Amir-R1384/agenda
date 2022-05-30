@@ -41,7 +41,7 @@ export default function App() {
 					</div>
 				</div>
 				{/* Body */}
-				<div id="body" className="flex flex-col flex-1 overflow-scroll gap-y-5">
+				<div id="body" className="flex flex-col flex-1 overflow-auto gap-y-5">
 					{typeof day === 'number' &&
 						[0, 1, 2, 3].map(el => (
 							<Period key={el} index={el} subject={t(subjects[el])} />
