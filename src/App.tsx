@@ -3,12 +3,12 @@ import { useTranslation } from 'react-i18next'
 import Period from './components/Period'
 import Div100vh from 'react-div-100vh'
 import config from './config'
-import { Day } from './types'
+import { Day, Subject } from './types'
 import './translations'
 
 export default function App() {
 	const [day, setDay] = useState<Day>()
-	const [subjects, setSubjects] = useState<string[]>([])
+	const [subjects, setSubjects] = useState<Subject[]>([])
 	const { t } = useTranslation()
 
 	useEffect(() => {
@@ -43,9 +43,10 @@ export default function App() {
 				{/* Body */}
 				<div id="body" className="flex flex-col flex-1 overflow-auto gap-y-5">
 					{typeof day === 'number' &&
-						[0, 1, 2, 3].map(el => (
-							<Period key={el} index={el} subject={t(subjects[el])} />
-						))}
+						subjects.map(
+							(subject, i) =>
+								subject && <Period key={i} index={i} subject={t(subject)} />
+						)}
 				</div>
 			</div>
 		</Div100vh>
