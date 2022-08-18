@@ -5,3 +5,91 @@
 * {
 	font-family: 'Poppins', sans-serif;
 }
+
+:root {
+	--header-height: env(safe-area-inset-top);
+	--footer-height: env(safe-area-inset-bottom);
+}
+
+body {
+	@apply bg-neutral-100;
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+}
+
+header {
+	background: rgb(255, 255, 255);
+	background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 100%);
+}
+
+footer {
+	padding-bottom: calc(env(safe-area-inset-bottom) + 10px);
+	/* padding-bottom: var(--footer-safe-area); */
+}
+
+main {
+	margin: var(--header-height) auto var(--footer-height) auto;
+	padding-bottom: calc(var(--footer-height));
+}
+
+@layer utilities {
+	.noSelect {
+		-webkit-tap-highlight-color: transparent;
+		-webkit-tap-highlight-color: transparent;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	.noSelect:focus {
+		outline: none !important;
+	}
+
+	.icon {
+		@apply text-neutral-800 h-6 w-6 rounded-md border border-transparent box-content p-1 transition-colors cursor-pointer;
+	}
+
+	.icon svg {
+		@apply drop-shadow-md;
+	}
+
+	.selected {
+		@apply border-neutral-800 shadow-md;
+	}
+
+	.card {
+		@apply w-full px-3 py-3 border flex flex-col gap-y-3 border-neutral-400 bg-neutral-200 shadow-md from-neutral-700 to-neutral-800 rounded-2xl;
+	}
+
+	.card-main {
+		@apply text-xl font-semibold text-neutral-700 drop-shadow-md;
+	}
+
+	.card-sub {
+		@apply text-sm text-neutral-500;
+	}
+
+	.no-data {
+		@apply w-full py-5 mt-2 text-lg font-medium text-center border shadow-sm bg-neutral-200 text-neutral-400 border-neutral-300 rounded-xl;
+	}
+
+	.label {
+		@apply font-medium text-neutral-600 text-lg;
+	}
+
+	.input {
+		@apply py-1 px-2 rounded-md border border-neutral-400 bg-white text-neutral-700 outline-neutral-500 placeholder-neutral-400 font-medium w-full text-lg;
+	}
+
+	.button {
+		@apply px-3 py-1 font-semibold text-white bg-neutral-700 rounded-md shadow-md;
+	}
+
+	.error {
+		@apply !border-2 !border-red-500 !outline-red-500;
+	}
+}

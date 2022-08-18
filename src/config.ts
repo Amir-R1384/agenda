@@ -12,23 +12,61 @@ const config: Config = {
 		'15:20 - 15:50',
 		'15:50 - 16:35'
 	],
-	beginingDay: '5/19/2022',
-	subjects: [
-		[null, null, null, 'math', 'science', 'history', 'french', null, null],
-		[null, null, null, 'dramaticArt', 'science', 'PE', 'english', null, null],
-		[null, null, null, 'french', 'math', 'science', 'history', null, null],
-		[null, null, null, 'french', 'math', 'science', 'ECR', null, null],
-		[null, null, null, 'english', 'french', 'math', 'science', null, null],
-		[null, null, null, 'history', 'french', 'dramaticArt', 'science', null, null],
-		[null, null, null, 'PE', 'english', 'french', 'math', null, null],
-		[null, null, null, 'science', 'history', 'french', 'math', null, null],
-		[null, null, null, 'science', 'ECR', 'english', 'french', null, null]
+	beginingDay: '5/23/2022',
+	classes: [401],
+	subjects: {
+		401: [
+			[null, null, null, 'math', 'science', 'history', 'french', null, null],
+			[null, null, null, 'dramaticArt', 'science', 'PE', 'english', null, null],
+			[null, null, null, 'french', 'math', 'science', 'history', null, null],
+			[null, null, null, 'french', 'math', 'science', 'ECR', null, null],
+			[null, null, null, 'english', 'french', 'math', 'science', null, null],
+			[null, null, null, 'history', 'french', 'dramaticArt', 'science', null, null],
+			[null, null, null, 'PE', 'english', 'french', 'math', null, null],
+			[null, null, null, 'science', 'history', 'french', 'math', null, null],
+			[null, null, null, 'science', 'ECR', 'english', 'french', null, null]
+		]
+	},
+	daysInWeek: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'],
+	months: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
+	menu: [
+		[
+			[{ body: 'Burger', type: 'PVT' }, { body: 'Ham' }],
+			[{ body: 'fish', type: 'fish' }],
+			[{ body: 'salad', type: 'vegan' }],
+			[{ body: 'pizza' }],
+			[{ body: 'fish', type: 'fish' }]
+		],
+		[
+			[{ body: 'Burger' }, { body: 'Ham' }],
+			[{ body: 'fish', type: 'fish' }],
+			[{ body: 'salad', type: 'vegan' }],
+			[{ body: 'pizza' }],
+			[{ body: 'fish', type: 'fish' }]
+		],
+		[
+			[{ body: 'Burger' }, { body: 'Ham' }],
+			[{ body: 'fish', type: 'fish' }],
+			[{ body: 'salad', type: 'vegan' }],
+			[{ body: 'pizza' }],
+			[{ body: 'fish', type: 'fish' }]
+		],
+		[
+			[{ body: 'Burger' }, { body: 'Ham' }],
+			[{ body: 'fish', type: 'fish' }],
+			[{ body: 'salad', type: 'vegan' }],
+			[{ body: 'pizza' }],
+			[{ body: 'fish', type: 'fish' }]
+		],
+		[
+			[{ body: 'Burger' }, { body: 'Ham' }],
+			[{ body: 'fish', type: 'fish' }],
+			[{ body: 'salad', type: 'vegan' }],
+			[{ body: 'pizza' }],
+			[{ body: 'fish', type: 'fish' }]
+		]
 	],
 	days: [
-		4,
-		5,
-		'we',
-		'we',
 		'c',
 		7,
 		8,
