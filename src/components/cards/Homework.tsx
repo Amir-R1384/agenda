@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSetRecoilState } from 'recoil'
-import { homeworksAtom } from '../../atoms'
-import { getPeriod, getToday } from '../../util'
-import { Homework as Params } from '../../types'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { homeworksAtom, loadingAtom } from '../../atoms'
 import config from '../../config'
+import { saveData } from '../../lib'
+import { Homework as HomeworkType } from '../../types'
+import { getPeriod, getToday } from '../../util'
 
-export default function Homework({ id, timestamp, period, subject, body }: Params) {
+export default function Homework({ id, timestamp, period, subject, body }: HomeworkType) {
 	const { t } = useTranslation()
 
 	const dateObj = new Date(timestamp)
@@ -16,8 +17,9 @@ export default function Homework({ id, timestamp, period, subject, body }: Param
 
 	const { type: PeriodType, number: periodNumber } = getPeriod(period)
 
-	const setHomeworks = useSetRecoilState(homeworksAtom)
+	const [homeworks, setHomeworks] = useRecoilState(homeworksAtom)
 	const [menuOpen, setMenuOpen] = useState(false)
+	const setLoading = useSetRecoilState(loadingAtom)
 
 	const menuBtnRef = useRef<HTMLDivElement>(null)
 
@@ -33,15 +35,16 @@ export default function Homework({ id, timestamp, period, subject, body }: Param
 		return () => window.removeEventListener('click', listener)
 	}, [menuOpen])
 
-	function deleteHomework() {
-		setHomeworks(prev => {
-			const newArr = [...prev]
+	async function deleteHomework() {
+		setLoading(true)
+		const newHomeworks = [...homeworks]
 
-			const currentHomework = newArr.find(obj => obj.id === id)!
-			newArr.splice(newArr.indexOf(currentHomework), 1)
+		const currentHomework = newHomeworks.find(obj => obj.id === id)!
+		newHomeworks.splice(newHomeworks.indexOf(currentHomework), 1)
 
-			return [...newArr]
-		})
+		await saveData('homeworks', newHomeworks)
+		setHomeworks(newHomeworks)
+		setLoading(false)
 	}
 
 	return (

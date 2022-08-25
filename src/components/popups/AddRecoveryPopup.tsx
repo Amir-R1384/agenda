@@ -1,14 +1,17 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Popup from './Popup'
-import { RecuperationInputs } from '../../types'
+import { RecoveryInputs } from '../../types'
+import Loading from '../Loading'
+import { useRecoilValue } from 'recoil'
+import { loadingAtom } from '../../atoms'
 
 interface Params {
 	visible: boolean
 	setVisible: React.Dispatch<React.SetStateAction<boolean>>
-	inputs: RecuperationInputs
-	setInputs: React.Dispatch<React.SetStateAction<RecuperationInputs>>
-	addRecuperation: () => void
+	inputs: RecoveryInputs
+	setInputs: React.Dispatch<React.SetStateAction<RecoveryInputs>>
+	addRecovery: () => Promise<void>
 }
 
 export default function AddRecoveryPopup({
@@ -16,7 +19,7 @@ export default function AddRecoveryPopup({
 	setVisible,
 	inputs,
 	setInputs,
-	addRecuperation
+	addRecovery
 }: Params) {
 	const { t } = useTranslation()
 
@@ -24,6 +27,7 @@ export default function AddRecoveryPopup({
 		subject: false,
 		day: false
 	})
+	const loading = useRecoilValue(loadingAtom)
 
 	function checkDayInput(num: string) {
 		return num === '' || (Number(num) >= 1 && Number(num) <= 9)
@@ -55,9 +59,10 @@ export default function AddRecoveryPopup({
 		clearErrors()
 		checkInputs()
 			.then(() => {
-				setVisible(false)
-				addRecuperation()
-				clearInputs()
+				addRecovery().then(() => {
+					setVisible(false)
+					clearInputs()
+				})
 			})
 			.catch(error => {
 				setErrors(prev => ({ ...prev, [error]: true }))
@@ -93,6 +98,9 @@ export default function AddRecoveryPopup({
 					className="button">
 					{t('cancel')}
 				</button>
+
+				{loading && <Loading forPopup={true} />}
+
 				<button type="submit" className="button">
 					{t('add')}
 				</button>

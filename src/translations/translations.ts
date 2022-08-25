@@ -19,7 +19,7 @@ export default {
 			schedule: 'Schedule',
 			homeworks: 'Homeworks',
 			upComing: 'Upcoming homeworks',
-			recuperations: 'Recovery courses',
+			recoveries: 'Recovery courses',
 			cafeMenu: 'Cafeteria menu',
 			// Food related
 			PVT: 'Textured vegetable proteins (contains soya)',
@@ -34,6 +34,10 @@ export default {
 			save: 'Save',
 			cancel: 'Cancel',
 			add: 'Add',
+			// Auth
+			signInWithGoogle: 'Sign in with Google',
+			signedInAs: 'Signed in as',
+			signOut: 'Sign out',
 			// Other
 			day: 'Day',
 			subject: 'Subject',
@@ -89,7 +93,7 @@ export default {
 			schedule: 'Horaire',
 			homeworks: 'Devoirs',
 			upComing: 'Les devoirs à venir',
-			recuperations: 'Récupérations',
+			recoveries: 'Récupérations',
 			cafeMenu: 'Menu de la caféteria',
 			// Food related
 			PVT: 'Protéins végétales texturées (contient du soya)',
@@ -104,6 +108,10 @@ export default {
 			save: 'Enregistrer',
 			cancel: 'Annuler',
 			add: 'Ajouter',
+			// Auth
+			signInWithGoogle: "S'identifier avec Google",
+			signedInAs: 'Connecté en tant que',
+			signOut: 'Se déconnecter',
 			// Other
 			day: 'Jour',
 			subject: 'Matière',

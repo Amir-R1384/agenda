@@ -4,6 +4,9 @@ import Popup from './Popup'
 import { getSchoolDay, getToday } from '../../util'
 import { HomeworkInputs } from '../../types'
 import config from '../../config'
+import Loading from '../Loading'
+import { useRecoilValue } from 'recoil'
+import { loadingAtom } from '../../atoms'
 
 interface Params {
 	visible: boolean
@@ -17,6 +20,7 @@ interface Params {
 export default function AddHomeworkPopup(props: Params) {
 	const today = getToday()
 	const { t } = useTranslation()
+	const loading = useRecoilValue(loadingAtom)
 	const [errors, setErrors] = useState({
 		date: false,
 		periodOrSubject: false,
@@ -111,7 +115,7 @@ export default function AddHomeworkPopup(props: Params) {
 				placeholder={t('homeworkDescription')}
 				maxLength={200}
 			/>
-			<div className="flex justify-between w-full">
+			<div className="flex items-center justify-between w-full">
 				<button
 					type="button"
 					onClick={() => {
@@ -126,6 +130,9 @@ export default function AddHomeworkPopup(props: Params) {
 					className="button">
 					{t('cancel')}
 				</button>
+
+				{loading && <Loading forPopup={true} />}
+
 				<button type="submit" className="button">
 					{t('add')}
 				</button>

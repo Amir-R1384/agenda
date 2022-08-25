@@ -1,5 +1,5 @@
 import { atom } from 'recoil'
-import { SchoolDay, Homework, RecuperationInputs } from './types'
+import { Homework, Recovery, SchoolDay } from './types'
 
 export const schoolDayAtom = atom<SchoolDay>({
 	key: 'schoolDayAtom',
@@ -11,12 +11,17 @@ export const homeworksAtom = atom<Homework[]>({
 	default: []
 })
 
-export const recoveriesAtom = atom<RecuperationInputs[]>({
+export const recoveriesAtom = atom<Recovery[]>({
 	key: 'recoveriesAtom',
 	default: []
 })
 
-export const groupNumberAtom = atom<string>({
+export const groupNumberAtom = atom<number | null>({
 	key: 'groupNumberAtom',
-	default: localStorage.groupNumber || ''
+	default: null
+})
+
+export const loadingAtom = atom({
+	key: 'loading',
+	default: false
 })

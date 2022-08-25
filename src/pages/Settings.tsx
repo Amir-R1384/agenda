@@ -1,11 +1,14 @@
 import React, { FormEvent, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
+import { signOut as FB_signOut } from 'firebase/auth'
+import { auth } from '../api'
 import { groupNumberAtom } from '../atoms'
-import config from '../config'
+import { validGroupNumber } from '../util'
+import { saveData } from '../lib'
 
 interface Inputs {
 	groupNumber: string
@@ -13,6 +16,7 @@ interface Inputs {
 
 export default function Settings() {
 	const { t } = useTranslation()
+	const navigate = useNavigate()
 	const [inputs, setInputs] = useState<Inputs>({
 		groupNumber: ''
 	})
@@ -47,25 +51,30 @@ export default function Settings() {
 		}
 	}, [saveMsg])
 
-	function saveGroupNumber(e: FormEvent) {
+	async function saveGroupNumber(e: FormEvent) {
 		e.preventDefault()
 		setErrors(prev => ({ ...prev, groupNumber: false }))
-		if (
-			inputs.groupNumber &&
-			!isNaN(Number(inputs.groupNumber)) &&
-			config.classes.includes(Number(inputs.groupNumber))
-		) {
-			setGroupNumber(inputs.groupNumber)
+
+		const groupNumber = Number(inputs.groupNumber)
+
+		if (validGroupNumber(groupNumber)) {
+			await saveData('groupNumber', groupNumber)
+			setGroupNumber(groupNumber)
 			showSaveMessage()
 		} else {
 			setErrors(prev => ({ ...prev, groupNumber: true }))
 		}
 	}
 
+	function signOut() {
+		FB_signOut(auth)
+		window.location.assign('/')
+	}
+
 	return (
 		<>
 			<div className="flex items-center w-full px-3 pt-2 pb-1 mb-10 bg-white border-b border-neutral-400 gap-x-5">
-				<Link to="/">
+				<Link to="/app/">
 					<FontAwesomeIcon icon={faAngleLeft} className="icon" />
 				</Link>
 				<div className="text-xl font-semibold text-neutral-700 -translate-y-0.5">
@@ -73,23 +82,29 @@ export default function Settings() {
 				</div>
 			</div>
 
-			<form onSubmit={saveGroupNumber} className="flex flex-col w-full px-3 mb-3 gap-y-5">
-				<div className="flex items-center justify-between w-full">
-					<label htmlFor="groupNumber" className="label">
-						{t('groupNumber')}:
-					</label>
-					<input
-						type="number"
-						id="groupNumber"
-						onChange={onChange}
-						value={inputs.groupNumber}
-						className={`!w-1/4 input ${errors.groupNumber && 'error'}`}
-					/>
-				</div>
-				<button type="submit" className="w-full button">
-					{t('save')}
+			<div className="flex flex-col px-3 gap-y-10">
+				<form onSubmit={saveGroupNumber} className="flex flex-col w-full gap-y-5">
+					<div className="flex items-center justify-between w-full">
+						<label htmlFor="groupNumber" className="label">
+							{t('groupNumber')}:
+						</label>
+						<input
+							type="number"
+							id="groupNumber"
+							onChange={onChange}
+							value={inputs.groupNumber}
+							className={`!w-1/4 input ${errors.groupNumber && 'error'}`}
+						/>
+					</div>
+					<button type="submit" className="w-full button">
+						{t('save')}
+					</button>
+				</form>
+
+				<button onClick={signOut} className="button !bg-red-500">
+					{t('signOut')}
 				</button>
-			</form>
+			</div>
 
 			<div className="absolute top-0 w-full max-w-md px-3 pt-2 -translate-x-1/2 left-1/2">
 				<div

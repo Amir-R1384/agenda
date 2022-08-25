@@ -6,6 +6,11 @@ export type Homework = {
 	subject: string
 	body: string
 }
+export type Recovery = {
+	id: number
+	subject: string
+	day: number
+}
 
 export interface Meal {
 	body: string
@@ -13,10 +18,11 @@ export interface Meal {
 }
 
 export interface Config {
+	appPrefix: string
 	times: string[]
 	beginingDay: string
 	classes: number[]
-	subjects: { [key: string]: (string | null)[][] }
+	subjects: { [key: number]: (string | null)[][] }
 	daysInWeek: string[]
 	months: string[]
 	menu: Meal[][][]
@@ -29,7 +35,7 @@ export interface HomeworkInputs {
 	body: string
 }
 
-export interface RecuperationInputs {
+export interface RecoveryInputs {
 	subject: string
 	day: string
 }

@@ -11,7 +11,7 @@ export default function Schedule() {
 
 	useEffect(() => {
 		if (typeof schoolDay === 'number') {
-			setPeriods(config.subjects[groupNumber][schoolDay - 1] as string[])
+			setPeriods(config.subjects[groupNumber!][schoolDay - 1] as string[])
 		}
 	}, [schoolDay])
 

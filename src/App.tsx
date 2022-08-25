@@ -1,52 +1,25 @@
-import { useEffect } from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
-import { useSetRecoilState } from 'recoil'
-import { Header, Footer } from './components'
-import { schoolDayAtom } from './atoms'
-import { getSchoolDay } from './util'
+import Div100vh from 'react-div-100vh'
+import { Route, Routes } from 'react-router-dom'
+import Main from './Main'
+import { Cafeteria, Home, Homeworks, Recoveries, Schedule, Settings, Setup } from './pages'
 import './translations'
 
 export default function App() {
-	const location = useLocation()
-	const setSchoolDay = useSetRecoilState(schoolDayAtom)
-
-	useEffect(() => {
-		const schoolDay = getSchoolDay('5/24/2022')
-		setSchoolDay(schoolDay)
-	}, [])
-
-	useEffect(() => {
-		window.scrollTo(0, 0)
-	}, [location])
-
-	useEffect(() => {
-		const root = document.querySelector(':root')! as HTMLElement
-		const rootStyles = getComputedStyle(root)
-
-		const safeAreaInsetTop = Number(rootStyles.getPropertyValue('--header-height').slice(0, -2))
-		const safeAreaInsetBottom = Number(
-			rootStyles.getPropertyValue('--footer-height').slice(0, -2)
-		)
-
-		const headerHeight = document.querySelector('header')!.offsetHeight
-		const footerHeight = document.querySelector('footer')!.offsetHeight
-
-		// Stop if already corrected the height
-		if (headerHeight === safeAreaInsetTop) return
-
-		root.style.setProperty('--header-height', `${safeAreaInsetTop + headerHeight}px`)
-		root.style.setProperty('--footer-height', `${safeAreaInsetBottom + footerHeight}px`)
-	}, [])
-
 	return (
-		<>
-			<Header />
-			<main className="w-full px-3 overflow-auto -z-10">
-				<div className="flex flex-col items-center gap-y-5">
-					<Outlet />
-				</div>
-			</main>
-			<Footer />
-		</>
+		<Div100vh>
+			<Routes>
+				<Route index element={<Setup />} />
+
+				<Route path="/app" element={<Main />}>
+					<Route index element={<Home />} />
+					<Route path="schedule" element={<Schedule />} />
+					<Route path="cafeteria" element={<Cafeteria />} />
+					<Route path="homeworks" element={<Homeworks />} />
+					<Route path="recoveries" element={<Recoveries />} />
+				</Route>
+
+				<Route path="/settings" element={<Settings />} />
+			</Routes>
+		</Div100vh>
 	)
 }

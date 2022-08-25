@@ -1,6 +1,7 @@
 import { Config } from './types'
 
 const config: Config = {
+	appPrefix: 'egenda',
 	times: [
 		'7:30 - 8:00',
 		'8:00 - 8:15',

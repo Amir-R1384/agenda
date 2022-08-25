@@ -1,38 +1,54 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRecoilState } from 'recoil'
-import { recoveriesAtom } from '../atoms'
+import { loadingAtom, recoveriesAtom } from '../atoms'
 import { Heading, AddButton, AddRecoveryPopup, Recovery } from '../components'
-import { RecuperationInputs } from '../types'
+import { saveData } from '../lib'
+import { RecoveryInputs } from '../types'
+import { useLoadData } from '../hooks'
+import { Loading } from '../components'
 
-export default function Recuperations() {
+export default function Recoveries() {
 	const { t } = useTranslation()
 	const [popup, setPopup] = useState(false)
-	const [inputs, setInputs] = useState<RecuperationInputs>({
+	const [inputs, setInputs] = useState<RecoveryInputs>({
 		subject: '',
 		day: ''
 	})
 	const [recoveries, setRecoveries] = useRecoilState(recoveriesAtom)
+	const [loading, setLoading] = useRecoilState(loadingAtom)
 
-	function addRecuperation() {
-		setRecoveries(prev => [...prev, inputs])
+	useLoadData('recoveries', setLoading)
+
+	async function addRecovery() {
+		setLoading(true)
+		const newRecoveries = [
+			...recoveries,
+			{ id: Date.now(), subject: inputs.subject, day: Number(inputs.day) }
+		]
+
+		await saveData('recoveries', newRecoveries)
+		setRecoveries(newRecoveries)
+		setLoading(false)
 	}
 
 	return (
 		<>
-			<Heading title="recuperations" />
-			{recoveries.length ? (
+			<Heading title="recoveries" />
+			{loading && !popup ? (
+				<Loading />
+			) : recoveries.length ? (
 				recoveries.map((recovery, i) => <Recovery key={i} {...recovery} />)
 			) : (
 				<div className="no-data">{t('noRecovery')}</div>
 			)}
-			<AddButton onClick={() => setPopup(true)} />
+			{(!loading || popup) && <AddButton onClick={() => setPopup(true)} />}
 			<AddRecoveryPopup
 				visible={popup}
 				setVisible={setPopup}
 				inputs={inputs}
 				setInputs={setInputs}
-				addRecuperation={addRecuperation}
+				addRecovery={addRecovery}
 			/>
 		</>
 	)
