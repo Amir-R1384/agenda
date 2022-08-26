@@ -9,6 +9,7 @@ import { auth } from '../api'
 import { groupNumberAtom } from '../atoms'
 import { validGroupNumber } from '../util'
 import { saveData } from '../lib'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 interface Inputs {
 	groupNumber: string
@@ -75,7 +76,7 @@ export default function Settings() {
 		<>
 			<div className="flex items-center w-full px-3 pt-2 pb-1 mb-10 bg-white border-b border-neutral-400 gap-x-5">
 				<Link to="/app/">
-					<FontAwesomeIcon icon={faAngleLeft} className="icon" />
+					<FontAwesomeIcon icon={faAngleLeft as IconProp} className="icon" />
 				</Link>
 				<div className="text-xl font-semibold text-neutral-700 -translate-y-0.5">
 					{t('settings')}

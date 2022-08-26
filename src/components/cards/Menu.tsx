@@ -4,6 +4,7 @@ import { faCarrot, faFish } from '@fortawesome/free-solid-svg-icons'
 import PVT from '../../assets/images/PVT.svg'
 import { Meal } from '../../types'
 import config from '../../config'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 interface Params {
 	index: number
@@ -23,10 +24,13 @@ export default function Menu({ index, meals }: Params) {
 						className="flex items-center text-lg font-semibold text-white gap-x-2">
 						<div className="card-main !font-medium">{body}</div>
 						{type === 'vegan' ? (
-							<FontAwesomeIcon icon={faCarrot} className="!text-neutral-600 icon" />
+							<FontAwesomeIcon
+								icon={faCarrot as IconProp}
+								className="!text-neutral-600 icon"
+							/>
 						) : type === 'fish' ? (
 							<FontAwesomeIcon
-								icon={faFish}
+								icon={faFish as IconProp}
 								className="!text-neutral-600 icon translate-y-px"
 							/>
 						) : type === 'PVT' ? (

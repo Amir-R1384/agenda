@@ -5,6 +5,7 @@ import { Heading, Menu } from '../components'
 import PVT from '../assets/images/PVT.svg'
 import { getDaysDiff } from '../util'
 import config from '../config'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 export default function Cafeteria() {
 	const { t } = useTranslation()
@@ -23,11 +24,14 @@ export default function Cafeteria() {
 
 			<div className="flex flex-col w-full p-3 mt-5 mb-5 border shadow border-neutral-400 bg-neutral-100 rounded-xl gap-y-3">
 				<div className="flex items-center justify-between w-full gap-x-2">
-					<FontAwesomeIcon icon={faCarrot} className="!text-neutral-600 h-7" />
+					<FontAwesomeIcon
+						icon={faCarrot as IconProp}
+						className="!text-neutral-600 h-7"
+					/>
 					<div className="text-xs text-right text-neutral-500">{t('vege')}</div>
 				</div>
 				<div className="flex items-center justify-between w-full gap-x-2">
-					<FontAwesomeIcon icon={faFish} className="!text-neutral-600 h-6" />
+					<FontAwesomeIcon icon={faFish as IconProp} className="!text-neutral-600 h-6" />
 					<div className="text-xs text-right text-neutral-500">{t('fishOrSeafood')}</div>
 				</div>
 
