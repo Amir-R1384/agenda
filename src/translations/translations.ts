@@ -41,13 +41,14 @@ export default {
 			// Other
 			day: 'Day',
 			subject: 'Subject',
+			class: 'Class',
+			classNumber: 'Class number',
 			notInList: 'Day out of list',
 			period: 'Period',
 			pastDueDate: 'Past due date!',
 			homeworkDescription: 'Homework description...',
 			periodOrSubject: 'Period or subject...',
 			groupNumber: 'Group number',
-
 			settings: 'Settings',
 			settingsSaved: 'Settings successfully saved!',
 			// Days
@@ -115,6 +116,8 @@ export default {
 			// Other
 			day: 'Jour',
 			subject: 'Matière',
+			class: 'Classe',
+			classNumber: 'Numéro de classe',
 			notInList: 'Hors de la liste',
 			period: 'Période',
 			pastDueDate: 'Date de remise dépassée!',

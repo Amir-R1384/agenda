@@ -5,7 +5,7 @@ import { loadingAtom, recoveriesAtom } from '../../atoms'
 import { saveData } from '../../lib'
 import { Recovery as RecoveryType } from '../../types'
 
-export default function Recovery({ id, day, subject }: RecoveryType) {
+export default function Recovery({ id, day, classNumber, subject }: RecoveryType) {
 	const { t } = useTranslation()
 
 	const menuBtnRef = useRef<HTMLDivElement>(null)
@@ -37,8 +37,13 @@ export default function Recovery({ id, day, subject }: RecoveryType) {
 
 	return (
 		<div className="relative card">
-			<div className="card-main">{subject}</div>
-			<div className="!text-base font-medium card-sub">
+			<div className="flex justify-between w-full card-sub itrems-center">
+				<div>{subject}</div>
+				<div>
+					{t('class')} {classNumber}
+				</div>
+			</div>
+			<div className="!text-base font-medium card-main">
 				{t('day')} {day}
 			</div>
 			<div

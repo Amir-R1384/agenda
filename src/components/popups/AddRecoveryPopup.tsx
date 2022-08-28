@@ -25,6 +25,7 @@ export default function AddRecoveryPopup({
 
 	const [errors, setErrors] = useState({
 		subject: false,
+		classNumber: false,
 		day: false
 	})
 	const loading = useRecoilValue(loadingAtom)
@@ -36,6 +37,7 @@ export default function AddRecoveryPopup({
 	function clearInputs() {
 		setInputs({
 			subject: '',
+			classNumber: '',
 			day: ''
 		})
 	}
@@ -43,6 +45,7 @@ export default function AddRecoveryPopup({
 	function clearErrors() {
 		setErrors({
 			subject: false,
+			classNumber: false,
 			day: false
 		})
 	}
@@ -76,6 +79,12 @@ export default function AddRecoveryPopup({
 				placeholder={t('subject')}
 				value={inputs.subject}
 				onChange={e => setInputs(prev => ({ ...prev, subject: e.target.value }))}
+			/>
+			<input
+				className={`input ${errors.classNumber && 'error'}`}
+				placeholder={t('classNumber')}
+				value={inputs.classNumber}
+				onChange={e => setInputs(prev => ({ ...prev, classNumber: e.target.value }))}
 			/>
 			<input
 				className={`input ${errors.day && 'error'}`}

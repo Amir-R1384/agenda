@@ -8,6 +8,7 @@ export type Homework = {
 }
 export type Recovery = {
 	id: number
+	classNumber: string
 	subject: string
 	day: number
 }
@@ -37,6 +38,7 @@ export interface HomeworkInputs {
 
 export interface RecoveryInputs {
 	subject: string
+	classNumber: string
 	day: string
 }
 

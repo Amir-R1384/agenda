@@ -13,6 +13,7 @@ export default function Recoveries() {
 	const [popup, setPopup] = useState(false)
 	const [inputs, setInputs] = useState<RecoveryInputs>({
 		subject: '',
+		classNumber: '',
 		day: ''
 	})
 	const [recoveries, setRecoveries] = useRecoilState(recoveriesAtom)
@@ -24,7 +25,12 @@ export default function Recoveries() {
 		setLoading(true)
 		const newRecoveries = [
 			...recoveries,
-			{ id: Date.now(), subject: inputs.subject, day: Number(inputs.day) }
+			{
+				id: Date.now(),
+				subject: inputs.subject,
+				classNumber: inputs.classNumber,
+				day: Number(inputs.day)
+			}
 		]
 
 		await saveData('recoveries', newRecoveries)
