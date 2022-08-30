@@ -13,6 +13,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 				<App />
 			</RecoilRoot>
 		</BrowserRouter>
-		//{' '}
 	</React.StrictMode>
 )
