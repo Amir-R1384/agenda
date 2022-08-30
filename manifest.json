@@ -2,7 +2,7 @@
 	"short_name": "Egenda",
 	"name": "Egenda",
 	"start_url": "/",
-	"display": "fullscreen",
+	"display": "standalone",
 	"scope": "/",
 	"theme_color": "white",
 	"description": "Electronic agenda for Pierre-Laporte highschool"

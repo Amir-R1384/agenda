@@ -11,7 +11,7 @@ import { auth, signIn as FB_signIn, usersCollection } from '../api'
 import { groupNumberAtom, loadingAtom } from '../atoms'
 import { getData, saveData, saveToLS } from '../lib'
 import { validGroupNumber } from '../util'
-import { Loading } from '../components'
+import { InstallGuide, InstallNotice, Loading } from '../components'
 
 export default function Setup() {
 	const navigate = useNavigate()
@@ -22,6 +22,9 @@ export default function Setup() {
 
 	const [value, setValue] = useState('')
 	const [error, setError] = useState(false)
+
+	const [installNoticePopup, setInstallNoticePopup] = useState(false)
+	const [installGuidePopup, setInstallGuidePopup] = useState(false)
 
 	const { t } = useTranslation()
 
@@ -47,6 +50,18 @@ export default function Setup() {
 			unsubscribe()
 		})
 	}, [])
+
+	// * Showing install message
+	useEffect(() => {
+		if (
+			state !== 0 &&
+			!localStorage.installNoticeShown &&
+			!window.matchMedia('(display-mode: standalone)').matches
+		) {
+			setInstallNoticePopup(true)
+			localStorage.installNoticeShown = true
+		}
+	}, [state, localStorage])
 
 	async function signIn() {
 		try {
@@ -99,41 +114,57 @@ export default function Setup() {
 
 	return (
 		<div className="flex flex-col items-center justify-between min-h-full py-20 bg-white">
-			<div className="text-3xl font-semibold text-neutral-800 drop-shadow-md">Egenda</div>
+			{installNoticePopup && <InstallNotice setPopup={setInstallNoticePopup} />}
+			{installGuidePopup && <InstallGuide setPopup={setInstallGuidePopup} />}
 
-			<div className="flex flex-col w-full px-5 -mt-10 gap-y-10">
+			<div className="text-4xl font-semibold text-neutral-800 drop-shadow-md">Egenda</div>
+
+			<div className="flex flex-col w-full px-5 -mt-10 gap-y-2">
 				{loading ? (
 					<Loading />
-				) : state === 1 ? (
-					<button
-						type="button"
-						onClick={signIn}
-						className="!py-2 button !bg-red-500 space-x-3">
-						<FontAwesomeIcon icon={faGoogle as IconProp} />
-						<span className="w-auto">{t('signInWithGoogle')}</span>
-					</button>
-				) : state === 2 ? (
-					<form onSubmit={onSubmit} className="flex flex-col items-stretch gap-y-3">
-						<input
-							value={value}
-							onChange={e => {
-								if (!isNaN(Number(e.target.value))) {
-									setValue(e.target.value)
-								}
-							}}
-							className={`text-center input ${error && 'error'}`}
-							placeholder={t('groupNumber')}
-						/>
-						<button type="submit" className="!py-1.5 button">
-							{t('access')}
-						</button>
-						<div className="text-xs text-center text-neutral-500">
-							{t('signedInAs')}{' '}
-							<span className="font-semibold">{auth.currentUser?.email}</span>
-						</div>
-					</form>
 				) : (
-					''
+					<>
+						{state === 1 ? (
+							<button
+								type="button"
+								onClick={signIn}
+								className="!py-2 button !bg-red-500 space-x-3">
+								<FontAwesomeIcon icon={faGoogle as IconProp} />
+								<span className="w-auto">{t('signInWithGoogle')}</span>
+							</button>
+						) : state === 2 ? (
+							<form
+								onSubmit={onSubmit}
+								className="flex flex-col items-stretch gap-y-3">
+								<input
+									value={value}
+									onChange={e => {
+										if (!isNaN(Number(e.target.value))) {
+											setValue(e.target.value)
+										}
+									}}
+									className={`text-center input ${error && 'error'}`}
+									placeholder={t('groupNumber')}
+								/>
+								<button type="submit" className="!py-1.5 button">
+									{t('access')}
+								</button>
+								<div className="text-xs text-center text-neutral-500">
+									{t('signedInAs')}{' '}
+									<span className="font-semibold">{auth.currentUser?.email}</span>
+								</div>
+							</form>
+						) : (
+							''
+						)}
+						{!window.matchMedia('(display-mode: standalone)').matches && (
+							<button
+								onClick={() => setInstallGuidePopup(true)}
+								className="link !py-2">
+								{t('installGuide')}
+							</button>
+						)}
+					</>
 				)}
 			</div>
 

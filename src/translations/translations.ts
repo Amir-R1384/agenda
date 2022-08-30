@@ -34,10 +34,22 @@ export default {
 			save: 'Save',
 			cancel: 'Cancel',
 			add: 'Add',
+			close: 'Close',
 			// Auth
 			signInWithGoogle: 'Sign in with Google',
 			signedInAs: 'Signed in as',
 			signOut: 'Sign out',
+			// Popup related
+			settingsSaved: 'Settings successfully saved!',
+			welcome: 'Welcome to Egenda!',
+			installGuide: 'How to install the app',
+			installNotice:
+				"We highly recommend installing the app on your phone for a much better experience. To do so, just open this site on your phone and click on 'How to install'.",
+			wrongBrowser: 'Open the site on your mobile phone and follow the instrcutions there',
+			clickOnShare: 'Click on the share button',
+			addToHome: "Click on 'Add to home screen'",
+			clickOn3Dots: 'Click on the 3 dots at the top right of your screen',
+			clickAddAndDone: "Click on 'Add' and the app should be installed on your home screen",
 			// Other
 			day: 'Day',
 			subject: 'Subject',
@@ -50,7 +62,6 @@ export default {
 			periodOrSubject: 'Period or subject...',
 			groupNumber: 'Group number',
 			settings: 'Settings',
-			settingsSaved: 'Settings successfully saved!',
 			// Days
 			sun: 'Sundy',
 			mon: 'Monday',
@@ -109,10 +120,23 @@ export default {
 			save: 'Enregistrer',
 			cancel: 'Annuler',
 			add: 'Ajouter',
+			close: 'Fermer',
 			// Auth
 			signInWithGoogle: "S'identifier avec Google",
 			signedInAs: 'Connecté en tant que',
 			signOut: 'Se déconnecter',
+			// Popup related
+			settingsSaved: 'Paramètres enregistrés avec succès!',
+			welcome: 'Bienvenue à Egenda',
+			installGuide: "Comment installer l'application",
+			installNotice:
+				"On suggère fortement d'installer l'application sur votre cellulaire pour une meilleure expérience. Pour le faire, ouvrez ce site sur votre cellulaire et cliquez sur 'Comment installer l'application'.",
+			wrongBrowser: 'Ouvrez le site sur votre cellulaire et suivez les instructions la-bas',
+			clickOnShare: 'Cliquez sur le bouton de partager',
+			addToHome: "Cliquez sur 'Ajouter à l'écran d'accueil'",
+			clickOn3Dots: 'Cliquez sur les 3 points en haut à droite',
+			clickAddAndDone:
+				"Cliquez sur 'Ajouter' et l'application devrait être ajoutée à votre écran d'accueil",
 			// Other
 			day: 'Jour',
 			subject: 'Matière',
@@ -125,7 +149,6 @@ export default {
 			periodOrSubject: 'Période ou matière...',
 			groupNumber: 'Numéro du groupe',
 			settings: 'Paramètres',
-			settingsSaved: 'Paramètres enregistrés avec succès!',
 			// Days
 			sun: 'Dimanche',
 			mon: 'Lundi',

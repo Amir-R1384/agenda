@@ -92,4 +92,20 @@ main {
 	.error {
 		@apply !border-2 !border-red-500 !outline-red-500;
 	}
+
+	.popup-bg {
+		@apply p-5 absolute top-0 left-0 z-20 flex items-center flex-col justify-center w-screen min-h-screen bg-black bg-opacity-75;
+	}
+
+	.popup-fg {
+		@apply flex flex-col items-start w-11/12 max-w-md p-3 rounded-lg bg-neutral-100 gap-y-4;
+	}
+
+	.installGuide-img {
+		@apply w-4/5 ml-2 border-2 rounded-md shadow-md border-neutral-500;
+	}
+
+	.link {
+		@apply underline text-neutral-500;
+	}
 }
