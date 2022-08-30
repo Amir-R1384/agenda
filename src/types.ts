@@ -1,4 +1,8 @@
 export type SchoolDay = 'we' | 'c' | 'jp' | number | undefined
+
+export type Day = 'c' | 'we' | 'jp' | number
+export type Subjects = { [key: number]: (string | null)[][] }
+
 export type Homework = {
 	id: number
 	timestamp: number
@@ -23,11 +27,11 @@ export interface Config {
 	times: string[]
 	beginingDay: string
 	classes: number[]
-	subjects: { [key: number]: (string | null)[][] }
+	subjects: Subjects
 	daysInWeek: string[]
 	months: string[]
 	menu: Meal[][][]
-	days: ('c' | 'we' | 'jp' | number)[]
+	days: Day[]
 }
 
 export interface HomeworkInputs {
