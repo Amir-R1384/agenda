@@ -38,7 +38,7 @@ export default function Recovery({ id, day, roomNumber, subject }: RecoveryType)
 	return (
 		<div className="relative card">
 			<div className="flex justify-between w-full card-sub itrems-center">
-				<div>{subject}</div>
+				<div>{t(subject)}</div>
 				<div>
 					{t('class')} {roomNumber}
 				</div>

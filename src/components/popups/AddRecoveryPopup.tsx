@@ -5,6 +5,7 @@ import { RecoveryInputs } from '../../types'
 import Loading from '../Loading'
 import { useRecoilValue } from 'recoil'
 import { loadingAtom } from '../../atoms'
+import config from '../../config'
 
 interface Params {
 	visible: boolean
@@ -52,7 +53,7 @@ export default function AddRecoveryPopup({
 
 	function checkInputs() {
 		return new Promise<void>((resolve, reject) => {
-			if (inputs.subject === '') return reject('subject')
+			if (inputs.subject === 'default') return reject('subject')
 			if (!checkDayInput(inputs.day) || inputs.day === '') return reject('day')
 			resolve()
 		})
@@ -74,12 +75,17 @@ export default function AddRecoveryPopup({
 
 	return (
 		<Popup onSubmit={onSubmit} visible={visible}>
-			<input
-				className={`input ${errors.subject && 'error'}`}
-				placeholder={t('subject')}
+			<select
 				value={inputs.subject}
 				onChange={e => setInputs(prev => ({ ...prev, subject: e.target.value }))}
-			/>
+				className={`input ${errors.subject && 'error'}`}>
+				<option value="default">{t('subject')}</option>
+				{config.subjects.map((subject, k) => (
+					<option key={k} value={subject}>
+						{t(subject)}
+					</option>
+				))}
+			</select>
 			<input
 				className={`input ${errors.roomNumber && 'error'}`}
 				placeholder={t('roomNumber')}
