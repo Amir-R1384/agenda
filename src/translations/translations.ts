@@ -11,6 +11,9 @@ export default {
 			PE: 'PE',
 			english: 'English',
 			ECR: 'ECR',
+			chemistry: 'Chemistry',
+			physics: 'Physics',
+			mondeEducF: 'World - Financial education',
 			// Day types
 			c: 'Holiday',
 			jp: 'Pedagogical',
@@ -100,6 +103,9 @@ export default {
 			PE: 'Éducation Physique',
 			english: 'Anglais',
 			ECR: 'ECR',
+			chemistry: 'Chimie',
+			physics: 'Physique',
+			mondeEducF: 'Monde - Éducation financière',
 			// Day types
 			c: 'Congé',
 			jp: 'Pédagogique',

@@ -8,7 +8,20 @@ const config: Config = {
 
 	daysInWeek: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'],
 	months: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
-	subjects: ['french', 'english', 'math', 'science', 'history', 'PE', 'ECR', 'dramaticArt'],
+	subjects: [
+		'french',
+		'english',
+		'math',
+		'science',
+		'history',
+		'PE',
+		'ECR',
+		'dramaticArt',
+		'plasticArt',
+		'chemistry',
+		'physics',
+		'mondeEducF'
+	],
 	classes: [401],
 
 	days,
