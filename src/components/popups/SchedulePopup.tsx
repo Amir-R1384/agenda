@@ -125,8 +125,7 @@ export default function SchedulePopup({ visible, setVisible, changing }: Params)
 												value={inputs[i][j]?.subject}
 												onChange={e => onInputChange(e, i, j, 'subject')}
 												className={`input !text-base font-normal ${
-													errors[i][j]!.subject &&
-													'!border-2 !border-red-500'
+													errors[i][j]!.subject && 'error'
 												}`}>
 												<option value="default">{t('subject')}</option>
 												{config.subjects.map((subject, k) => (
@@ -141,8 +140,7 @@ export default function SchedulePopup({ visible, setVisible, changing }: Params)
 												onChange={e => onInputChange(e, i, j, 'roomNumber')}
 												type="text"
 												className={`input !text-sm  ${
-													errors[i][j]!.roomNumber &&
-													'!border-2 !border-red-500'
+													errors[i][j]!.roomNumber && 'error'
 												}`}
 												placeholder={t('roomNumber')}
 											/>
@@ -160,7 +158,7 @@ export default function SchedulePopup({ visible, setVisible, changing }: Params)
 				{loading && <Loading forPopup={true} />}
 
 				<button type="submit" className="button">
-					{t('add')}
+					{t(changing ? 'save' : 'add')}
 				</button>
 			</div>
 		</Popup>
