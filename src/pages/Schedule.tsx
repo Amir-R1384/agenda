@@ -26,6 +26,8 @@ export default function Schedule() {
 			<Heading title="schedule" />
 			{loading ? (
 				<Loading />
+			) : typeof schoolDay !== 'number' ? (
+				<div className="no-data">{t('noSchool')}</div>
 			) : periods ? (
 				periods.map((period, i) => period && <Period key={i} index={i} {...period} />)
 			) : (
