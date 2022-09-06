@@ -5,7 +5,6 @@ import { loadingAtom, recoveriesAtom } from '../atoms'
 import { Heading, AddButton, AddRecoveryPopup, Recovery } from '../components'
 import { saveData } from '../lib'
 import { RecoveryInputs } from '../types'
-import { useLoadData } from '../hooks'
 import { Loading } from '../components'
 
 export default function Recoveries() {
@@ -13,13 +12,11 @@ export default function Recoveries() {
 	const [popup, setPopup] = useState(false)
 	const [inputs, setInputs] = useState<RecoveryInputs>({
 		subject: '',
-		classNumber: '',
+		roomNumber: '',
 		day: ''
 	})
 	const [recoveries, setRecoveries] = useRecoilState(recoveriesAtom)
 	const [loading, setLoading] = useRecoilState(loadingAtom)
-
-	useLoadData('recoveries', setLoading)
 
 	async function addRecovery() {
 		setLoading(true)
@@ -28,7 +25,7 @@ export default function Recoveries() {
 			{
 				id: Date.now(),
 				subject: inputs.subject,
-				classNumber: inputs.classNumber,
+				roomNumber: inputs.roomNumber,
 				day: Number(inputs.day)
 			}
 		]

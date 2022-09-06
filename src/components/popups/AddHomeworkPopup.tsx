@@ -97,14 +97,12 @@ export default function AddHomeworkPopup(props: Params) {
 					</option>
 					<option value="7">Bavette 4 -- {config.times[7]}</option>
 					<option value="8">Bavette 5 -- {config.times[8]}</option>
-					<option value="math">{t('math')}</option>
-					<option value="science">{t('science')}</option>
-					<option value="french">{t('french')}</option>
-					<option value="history">{t('history')}</option>
-					<option value="english">{t('english')}</option>
-					<option value="ECR">{t('ECR')}</option>
-					<option value="PE">{t('PE')}</option>
-					<option value="dramaticArt">{t('dramaticArt')}</option>
+					{/* Options for courses */}
+					{config.subjects.map((subject, i) => (
+						<option key={i} value={subject}>
+							{t(subject)}
+						</option>
+					))}
 				</select>
 			</div>
 

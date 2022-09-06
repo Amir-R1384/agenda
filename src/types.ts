@@ -1,7 +1,7 @@
 export type SchoolDay = 'we' | 'c' | 'jp' | number | undefined
 
 export type Day = 'c' | 'we' | 'jp' | number
-export type Subjects = { [key: number]: (string | null)[][] }
+export type Schedule<T> = { [key: number]: (null | { subject: T; roomNumber: T })[] }
 
 export type Homework = {
 	id: number
@@ -12,7 +12,7 @@ export type Homework = {
 }
 export type Recovery = {
 	id: number
-	classNumber: string
+	roomNumber: string
 	subject: string
 	day: number
 }
@@ -26,8 +26,8 @@ export interface Config {
 	appPrefix: string
 	times: string[]
 	beginingDay: string
+	subjects: string[]
 	classes: number[]
-	subjects: Subjects
 	daysInWeek: string[]
 	months: string[]
 	menu: Meal[][][]
@@ -42,7 +42,7 @@ export interface HomeworkInputs {
 
 export interface RecoveryInputs {
 	subject: string
-	classNumber: string
+	roomNumber: string
 	day: string
 }
 

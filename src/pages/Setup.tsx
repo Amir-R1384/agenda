@@ -1,27 +1,21 @@
-import { FormEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { auth, signIn as FB_signIn, usersCollection } from '../api'
-import { groupNumberAtom, loadingAtom } from '../atoms'
-import { getData, saveData, saveToLS } from '../lib'
-import { validGroupNumber } from '../util'
+import { loadingAtom } from '../atoms'
 import { InstallGuide, InstallNotice, Loading } from '../components'
 
 export default function Setup() {
 	const navigate = useNavigate()
 
-	const [state, setState] = useState<0 | 1 | 2>(0) // 0: Welcome screen, 1: SignIn, 2: groupNumber screen
+	const [state, setState] = useState<0 | 1>(0) // 0: Welcome screen, 1: Sign In
 	const [loading, setLoading] = useRecoilState(loadingAtom)
-	const setGroupNumber = useSetRecoilState(groupNumberAtom)
-
-	const [value, setValue] = useState('')
-	const [error, setError] = useState(false)
 
 	const [installNoticePopup, setInstallNoticePopup] = useState(false)
 	const [installGuidePopup, setInstallGuidePopup] = useState(false)
@@ -35,18 +29,10 @@ export default function Setup() {
 		const unsubscribe = onAuthStateChanged(auth, async user => {
 			if (!user) {
 				setState(1) // Show sign up button
-				setLoading(false)
 			} else {
-				const groupNumber = await getData('groupNumber')
-
-				if (validGroupNumber(groupNumber)) {
-					setGroupNumber(groupNumber)
-					navigate('/app/')
-				} else {
-					setState(2) // show group number form
-					setLoading(false)
-				}
+				navigate('/app/')
 			}
+			setLoading(false)
 			unsubscribe()
 		})
 	}, [])
@@ -72,44 +58,18 @@ export default function Setup() {
 			const userSnapshot = await getDoc(doc(usersCollection, uid))
 
 			if (userSnapshot.exists()) {
-				const groupNumber = userSnapshot.data().groupNumber
-
-				if (validGroupNumber(groupNumber)) {
-					saveToLS('groupNumber', groupNumber)
-					setGroupNumber(groupNumber)
-					navigate('/app/')
-				} else {
-					setState(2)
-					setLoading(false)
-				}
+				navigate('/app/')
 			} else {
 				await setDoc(doc(usersCollection, uid), {
-					groupNumber: 0,
+					schedule: {},
 					homeworks: [],
 					recoveries: []
 				})
-				setState(2)
-				setLoading(false)
 			}
+			setLoading(false)
 		} catch (err) {
 			console.error(err)
 		}
-	}
-
-	async function onSubmit(e: FormEvent) {
-		e.preventDefault()
-		setLoading(true)
-
-		setError(false)
-		const groupNumber = Number(value)
-
-		if (!validGroupNumber(groupNumber)) return setError(true)
-
-		await saveData('groupNumber', groupNumber)
-
-		setGroupNumber(groupNumber)
-		setLoading(false)
-		navigate('/app/')
 	}
 
 	return (
@@ -132,28 +92,6 @@ export default function Setup() {
 								<FontAwesomeIcon icon={faGoogle as IconProp} />
 								<span className="w-auto">{t('signInWithGoogle')}</span>
 							</button>
-						) : state === 2 ? (
-							<form
-								onSubmit={onSubmit}
-								className="flex flex-col items-stretch gap-y-3">
-								<input
-									value={value}
-									onChange={e => {
-										if (!isNaN(Number(e.target.value))) {
-											setValue(e.target.value)
-										}
-									}}
-									className={`text-center input ${error && 'error'}`}
-									placeholder={t('groupNumber')}
-								/>
-								<button type="submit" className="!py-1.5 button">
-									{t('access')}
-								</button>
-								<div className="text-xs text-center text-neutral-500">
-									{t('signedInAs')}{' '}
-									<span className="font-semibold">{auth.currentUser?.email}</span>
-								</div>
-							</form>
 						) : (
 							''
 						)}

@@ -62,7 +62,7 @@ main {
 	}
 
 	.card {
-		@apply w-full px-3 py-3 border flex flex-col gap-y-3 border-neutral-400 bg-neutral-200 shadow-md from-neutral-700 to-neutral-800 rounded-2xl;
+		@apply w-full px-3 py-3 border flex flex-col gap-y-4 border-neutral-400 bg-neutral-200 shadow-md from-neutral-700 to-neutral-800 rounded-2xl;
 	}
 
 	.card-main {
@@ -94,7 +94,11 @@ main {
 	}
 
 	.popup-bg {
-		@apply p-5 absolute top-0 left-0 z-20 flex items-center flex-col justify-center w-screen min-h-screen bg-black bg-opacity-75;
+		@apply fixed left-0 z-20 top-0 w-screen h-screen bg-black bg-opacity-75;
+	}
+
+	.popup-parent {
+		@apply py-10 absolute top-0 left-0 z-20 flex w-screen min-h-screen items-center flex-col justify-center;
 	}
 
 	.popup-fg {

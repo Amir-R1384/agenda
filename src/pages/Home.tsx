@@ -1,22 +1,19 @@
 import { useTranslation } from 'react-i18next'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import { homeworksAtom, loadingAtom } from '../atoms'
 import { Heading, Homework, Loading } from '../components'
-import { useLoadData } from '../hooks'
 import { getToday } from '../util'
 
 export default function Home() {
 	const homeworks = useRecoilValue(homeworksAtom)
-	const [loading, setLoading] = useRecoilState(loadingAtom)
+	const loading = useRecoilValue(loadingAtom)
 	const { t } = useTranslation()
-
-	useLoadData('homeworks', setLoading)
 
 	const todayTimeStamp = new Date(getToday()).valueOf()
 	const upcomingHomeworks = homeworks
 		.filter(homework => homework.timestamp > todayTimeStamp)
 		.sort((a, b) => a.timestamp - b.timestamp)
-		.slice(0, 3)
+		.slice(0, 5)
 
 	return (
 		<>

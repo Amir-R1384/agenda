@@ -3,7 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { onAuthStateChanged } from 'firebase/auth'
 import { getDoc, doc } from 'firebase/firestore'
 import { useSetRecoilState } from 'recoil'
-import { groupNumberAtom, homeworksAtom, loadingAtom, recoveriesAtom, schoolDayAtom } from './atoms'
+import { homeworksAtom, loadingAtom, recoveriesAtom, scheduleAtom, schoolDayAtom } from './atoms'
 import { Footer, Header } from './components'
 import { getSchoolDay } from './util'
 import { usersCollection, auth } from './api'
@@ -13,9 +13,9 @@ export default function Main() {
 	const location = useLocation()
 	const setSchoolDay = useSetRecoilState(schoolDayAtom)
 
-	const setGroupNumber = useSetRecoilState(groupNumberAtom)
 	const setHomeworks = useSetRecoilState(homeworksAtom)
 	const setRecoveries = useSetRecoilState(recoveriesAtom)
+	const setSchedule = useSetRecoilState(scheduleAtom)
 
 	const setLoading = useSetRecoilState(loadingAtom)
 
@@ -30,17 +30,17 @@ export default function Main() {
 
 	// * Syncing the data with the server in case of changes on other devices
 	useEffect(() => {
+		setLoading(true)
 		onAuthStateChanged(auth, async user => {
-			setLoading(true)
-
 			const snapshot = await getDoc(doc(usersCollection, user?.uid))
-			const { groupNumber, homeworks, recoveries } = snapshot.data()!
 
-			saveToLS('groupNumber', groupNumber)
+			const { schedule, homeworks, recoveries } = snapshot.data()!
+
+			saveToLS('schedule', schedule)
 			saveToLS('homeworks', homeworks)
 			saveToLS('recoveries', recoveries)
 
-			setGroupNumber(groupNumber)
+			setSchedule(schedule)
 			setHomeworks(homeworks)
 			setRecoveries(recoveries)
 

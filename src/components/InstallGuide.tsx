@@ -22,49 +22,52 @@ export default function InstallGuide({ setPopup }: Params) {
 	}, [])
 
 	return (
-		<div className="popup-bg !justify-start">
-			<div className="space-y-5 popup-fg text-neutral-700 drop-shadow-md">
-				{browser === 'other' ? (
-					<div>{t('wrongBrowser')}</div>
-				) : browser === 'iphone' ? (
-					<>
-						<div className="space-y-2">
-							<div>1. {t('clickOnShare')}</div>
-							<img src={iphone1} className="installGuide-img" />
-						</div>
-						<div className="space-y-2">
-							<div>2. {t('addToHome')}</div>
-							{/^fr\b/.test(navigator.language) ? (
-								<img src={iphone2Fr} className="installGuide-img" />
-							) : (
-								<img src={iphone2} className="installGuide-img" />
-							)}
-						</div>
-						<div>3. {t('clickAddAndDone')}</div>
-					</>
-				) : browser === 'android' ? (
-					<>
-						<div className="space-y-2">
-							<div>1. {t('clickOn3Dots')}</div>
-							<img src={android1} className="installGuide-img" />
-						</div>
-						<div className="space-y-2">
-							<div>2. {t('addToHome')}</div>
-							{/^fr\b/.test(navigator.language) ? (
-								<img src={android2Fr} className="installGuide-img" />
-							) : (
-								<img src={android2} className="installGuide-img" />
-							)}
-						</div>
-						<div>3. {t('clickAddAndDone')}</div>
-					</>
-				) : (
-					''
-				)}
-				<button onClick={() => setPopup(false)} className="button">
-					{t('close')}
-				</button>
+		<>
+			<div className="popup-bg"></div>
+			<div className="popup-parent !justify-start">
+				<div className="space-y-5 popup-fg text-neutral-700 drop-shadow-md">
+					{browser === 'other' ? (
+						<div>{t('wrongBrowser')}</div>
+					) : browser === 'iphone' ? (
+						<>
+							<div className="space-y-2">
+								<div>1. {t('clickOnShare')}</div>
+								<img src={iphone1} className="installGuide-img" />
+							</div>
+							<div className="space-y-2">
+								<div>2. {t('addToHome')}</div>
+								{/^fr\b/.test(navigator.language) ? (
+									<img src={iphone2Fr} className="installGuide-img" />
+								) : (
+									<img src={iphone2} className="installGuide-img" />
+								)}
+							</div>
+							<div>3. {t('clickAddAndDone')}</div>
+						</>
+					) : browser === 'android' ? (
+						<>
+							<div className="space-y-2">
+								<div>1. {t('clickOn3Dots')}</div>
+								<img src={android1} className="installGuide-img" />
+							</div>
+							<div className="space-y-2">
+								<div>2. {t('addToHome')}</div>
+								{/^fr\b/.test(navigator.language) ? (
+									<img src={android2Fr} className="installGuide-img" />
+								) : (
+									<img src={android2} className="installGuide-img" />
+								)}
+							</div>
+							<div>3. {t('clickAddAndDone')}</div>
+						</>
+					) : (
+						''
+					)}
+					<button onClick={() => setPopup(false)} className="button">
+						{t('close')}
+					</button>
+				</div>
 			</div>
-		</div>
+		</>
 	)
 }

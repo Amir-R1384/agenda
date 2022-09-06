@@ -1,5 +1,4 @@
 import days from './days'
-import subjects from './subjects'
 import menu from './menu'
 import { Config } from '../types'
 
@@ -9,10 +8,9 @@ const config: Config = {
 
 	daysInWeek: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'],
 	months: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
-
+	subjects: ['french', 'english', 'math', 'science', 'history', 'PE', 'ECR', 'dramaticArt'],
 	classes: [401],
 
-	subjects,
 	days,
 	menu,
 

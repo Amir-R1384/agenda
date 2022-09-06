@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { loadingAtom, recoveriesAtom } from '../../atoms'
 import { saveData } from '../../lib'
 import { Recovery as RecoveryType } from '../../types'
 
-export default function Recovery({ id, day, classNumber, subject }: RecoveryType) {
+export default function Recovery({ id, day, roomNumber, subject }: RecoveryType) {
 	const { t } = useTranslation()
 
 	const menuBtnRef = useRef<HTMLDivElement>(null)
@@ -40,7 +40,7 @@ export default function Recovery({ id, day, classNumber, subject }: RecoveryType
 			<div className="flex justify-between w-full card-sub itrems-center">
 				<div>{subject}</div>
 				<div>
-					{t('class')} {classNumber}
+					{t('class')} {roomNumber}
 				</div>
 			</div>
 			<div className="!text-base font-medium card-main">
