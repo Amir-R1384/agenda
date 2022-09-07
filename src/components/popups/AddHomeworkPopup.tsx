@@ -60,14 +60,14 @@ export default function AddHomeworkPopup(props: Params) {
 			<input
 				className={`bg-white input ${errors.date && 'error'}`}
 				type="date"
-				// min={today}
+				min={today}
 				value={props.inputs.date}
 				onChange={e => {
 					const todayDate = new Date(today).valueOf()
 					const selectedDate = new Date(e.target.value).valueOf()
 
-					// if (todayDate <= selectedDate)
-					props.setInputs(prev => ({ ...prev, date: e.target.value }))
+					if (todayDate <= selectedDate)
+						props.setInputs(prev => ({ ...prev, date: e.target.value }))
 				}}
 			/>
 			<div

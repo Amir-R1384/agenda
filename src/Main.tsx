@@ -20,7 +20,7 @@ export default function Main() {
 	const setLoading = useSetRecoilState(loadingAtom)
 
 	useEffect(() => {
-		const schoolDay = getSchoolDay('5/24/2022') // Test day
+		const schoolDay = getSchoolDay()
 		setSchoolDay(schoolDay)
 	}, [])
 

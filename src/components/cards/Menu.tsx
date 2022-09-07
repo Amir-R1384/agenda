@@ -22,7 +22,7 @@ export default function Menu({ index, meals }: Params) {
 					<div
 						key={i}
 						className="flex items-center text-lg font-semibold text-white gap-x-2">
-						<div className="card-main !font-medium">{body}</div>
+						<div className="card-main !font-medium">{t(body)}</div>
 						{type === 'vegan' ? (
 							<FontAwesomeIcon
 								icon={faCarrot as IconProp}
