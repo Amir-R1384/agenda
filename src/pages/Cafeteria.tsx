@@ -9,7 +9,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 export default function Cafeteria() {
 	const { t } = useTranslation()
-	const daysDiff = getDaysDiff('6/20/2022')
+	const daysDiff = getDaysDiff(new Date())
 	const weekIndex = Math.floor(daysDiff / 7)
 	const menuIndex = Math.floor(weekIndex % 4)
 

@@ -1,6 +1,14 @@
 import { Day } from '../types'
 
 const days: Day[] = [
+	'jp',
+	'jp',
+	3,
+	4,
+	5,
+	'we',
+	'we',
+	'c',
 	7,
 	8,
 	9,

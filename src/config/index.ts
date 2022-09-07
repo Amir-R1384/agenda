@@ -4,7 +4,7 @@ import { Config } from '../types'
 
 const config: Config = {
 	appPrefix: 'egenda',
-	beginingDay: '9/6/2022',
+	beginingDay: '8/29/2022',
 
 	daysInWeek: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'],
 	months: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
