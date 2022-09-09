@@ -63,9 +63,9 @@ export default function SchedulePopup({ visible, setVisible, changing }: Params)
 			for (let j = 0; j < 9; j++) {
 				const { subject, roomNumber } = inputs[i][j]!
 
-				if (subject === 'default' && roomNumber.trim() === '') {
+				if (subject === 'default' && roomNumber!.trim() === '') {
 					finalSchedule[i][j] = null
-				} else if (subject !== 'default' && roomNumber.trim() !== '') {
+				} else if (subject !== 'default') {
 					finalSchedule[i][j]!.subject = subject
 					finalSchedule[i][j]!.roomNumber = roomNumber
 				} else {
@@ -73,10 +73,8 @@ export default function SchedulePopup({ visible, setVisible, changing }: Params)
 					newAccordions[i] = true
 					setAccordions(newAccordions)
 
-					const problem = subject === 'default' ? 'subject' : 'roomNumber'
-
 					setErrors(prev => {
-						prev[i][j]![problem] = true
+						prev[i][j]!.subject = true
 						return { ...prev }
 					})
 
