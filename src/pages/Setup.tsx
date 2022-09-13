@@ -65,8 +65,8 @@ export default function Setup() {
 					homeworks: [],
 					recoveries: []
 				})
+				setLoading(false)
 			}
-			setLoading(false)
 		} catch (err) {
 			console.error(err)
 		}

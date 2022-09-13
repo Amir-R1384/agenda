@@ -8,6 +8,8 @@ export default function Heading({ title }: Params) {
 	const { t } = useTranslation()
 
 	return (
-		<div className="w-full mt-5 -mb-4 text-xl drop-shadow-md text-neutral-700">{t(title)}</div>
+		<div className="w-full mt-5 -mb-4 text-xl font-medium drop-shadow-md text-neutral-700">
+			{t(title)}
+		</div>
 	)
 }

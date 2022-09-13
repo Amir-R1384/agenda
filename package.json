@@ -19,6 +19,7 @@
 		"react-dom": "^18.0.0",
 		"react-i18next": "^11.16.9",
 		"react-router-dom": "^6.3.0",
+		"react-swipeable": "^7.0.0",
 		"recoil": "^0.7.3"
 	},
 	"devDependencies": {

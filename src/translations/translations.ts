@@ -33,7 +33,7 @@ export default {
 			noHomework2: 'Click the button below to add a homework',
 			noRecovery: 'No recovery courses',
 			noSchedule: "You haven't created a schedule yet",
-			noSchool: 'There is no school today',
+			noSchool: 'There is no school',
 			// Buttons
 			access: 'Access',
 			save: 'Save',
@@ -59,6 +59,9 @@ export default {
 			clickAddAndDone: "Click on 'Add' and the app should be installed on your home screen",
 			// Other
 			day: 'Day',
+			today: 'Today',
+			yesterday: 'Yesterday',
+			tomorrow: 'Tomorrow',
 			subject: 'Subject',
 			class: 'Class',
 			roomNumber: 'Room number',
@@ -167,7 +170,7 @@ export default {
 			noHomework2: 'Clickez sur le bouton ci-dessous pour ajouter un devoir',
 			noRecovery: 'Pas de cours de récupération',
 			noSchedule: "Vous n'avez pas encore créé un horaire",
-			noSchool: "Il n'y a pas d'école aujourd'hui",
+			noSchool: "Il n'y a pas d'école",
 			// Buttons
 			access: 'Accéder',
 			save: 'Enregistrer',
@@ -194,6 +197,9 @@ export default {
 				"Cliquez sur 'Ajouter' et l'application devrait être ajoutée à votre écran d'accueil",
 			// Other
 			day: 'Jour',
+			today: "Aujourd'hui",
+			yesterday: 'Hier',
+			tomorrow: 'Demain',
 			subject: 'Matière',
 			class: 'Classe',
 			roomNumber: 'Numéro de local',

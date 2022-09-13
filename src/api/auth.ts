@@ -3,6 +3,10 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, UserCredential } from 'fi
 const auth = getAuth()
 const provider = new GoogleAuthProvider()
 
+provider.setCustomParameters({
+	prompt: 'select_account'
+})
+
 auth.languageCode = window.navigator?.language || 'en'
 
 async function signIn(): Promise<UserCredential> {
