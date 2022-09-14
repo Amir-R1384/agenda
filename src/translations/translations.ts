@@ -14,6 +14,8 @@ export default {
 			chemistry: 'Chemistry',
 			physics: 'Physics',
 			mondeEducF: 'World - Financial education',
+			psychology: 'Psychology',
+			entrepreneurship: 'Entrepreneurship',
 			// Day types
 			c: 'Holiday',
 			jp: 'Pedagogical',
@@ -151,6 +153,8 @@ export default {
 			chemistry: 'Chimie',
 			physics: 'Physique',
 			mondeEducF: 'Monde - Éducation financière',
+			psychology: 'Psychologie',
+			entrepreneurship: 'Entrepreneuriat',
 			// Day types
 			c: 'Congé',
 			jp: 'Pédagogique',

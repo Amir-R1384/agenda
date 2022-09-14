@@ -20,7 +20,9 @@ const config: Config = {
 		'plasticArt',
 		'chemistry',
 		'physics',
-		'mondeEducF'
+		'mondeEducF',
+		'psychology',
+		'entrepreneurship'
 	],
 	classes: [401],
 
