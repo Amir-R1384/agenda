@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { auth, signIn as FB_signIn, usersCollection } from '../api'
 import { loadingAtom } from '../atoms'
 import { InstallGuide, InstallNotice, Loading } from '../components'
+import title from '../assets/images/title.png'
 
 export default function Setup() {
 	const navigate = useNavigate()
@@ -77,7 +78,7 @@ export default function Setup() {
 			{installNoticePopup && <InstallNotice setPopup={setInstallNoticePopup} />}
 			{installGuidePopup && <InstallGuide setPopup={setInstallGuidePopup} />}
 
-			<div className="text-4xl font-semibold text-neutral-800 drop-shadow-md">Egenda</div>
+			<img src={title} alt="Egenda" className="w-1/2" />
 
 			<div className="flex flex-col w-full px-5 -mt-10 gap-y-2">
 				{loading ? (
