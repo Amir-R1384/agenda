@@ -39,6 +39,8 @@ export default function Main() {
 
 	// * Syncing the data with the server in case of changes on other devices
 	useEffect(() => {
+		// @ts-ignore
+		if (window.syncedData) return
 		setLoading(true)
 		onAuthStateChanged(auth, async user => {
 			const snapshot = await getDoc(doc(usersCollection, user?.uid))
@@ -54,6 +56,8 @@ export default function Main() {
 			setRecoveries(recoveries)
 
 			setLoading(false)
+			// @ts-ignore
+			window.syncedData = true
 		})
 	}, [])
 

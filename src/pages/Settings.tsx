@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
@@ -9,6 +9,7 @@ import { useState } from 'react'
 import SchedulePopup from '../components/popups/SchedulePopup'
 
 export default function Settings() {
+	const navigate = useNavigate()
 	const { t } = useTranslation()
 	const [schedulePopup, setSchedulePopup] = useState(false)
 
@@ -20,9 +21,9 @@ export default function Settings() {
 	return (
 		<>
 			<div className="flex items-center w-full px-3 pt-2 pb-1 mb-10 bg-white border-b border-neutral-400 gap-x-5">
-				<Link to="/app/">
+				<button onClick={() => navigate(-1)}>
 					<FontAwesomeIcon icon={faAngleLeft as IconProp} className="icon" />
-				</Link>
+				</button>
 				<div className="text-xl font-semibold text-neutral-700 -translate-y-0.5">
 					{t('settings')}
 				</div>
