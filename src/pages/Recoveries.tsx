@@ -41,7 +41,11 @@ export default function Recoveries() {
 			{loading && !popup ? (
 				<Loading />
 			) : recoveries.length ? (
-				recoveries.map((recovery, i) => <Recovery key={i} {...recovery} />)
+				<div className="custom-grid">
+					{recoveries.map((recovery, i) => (
+						<Recovery key={i} {...recovery} />
+					))}
+				</div>
 			) : (
 				<div className="no-data">{t('noRecovery')}</div>
 			)}

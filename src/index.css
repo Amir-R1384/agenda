@@ -13,6 +13,7 @@
 
 body {
 	@apply bg-neutral-100;
+	user-select: none;
 	-webkit-user-select: none;
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
@@ -25,12 +26,6 @@ header {
 
 footer {
 	padding-bottom: calc(env(safe-area-inset-bottom) + 10px);
-	/* padding-bottom: var(--footer-safe-area); */
-}
-
-main {
-	margin: var(--header-height) auto var(--footer-height) auto;
-	padding-bottom: calc(var(--footer-height));
 }
 
 @layer utilities {
@@ -50,7 +45,7 @@ main {
 	}
 
 	.icon {
-		@apply text-neutral-800 h-6 w-6 rounded-md border border-transparent box-content p-1 transition-colors cursor-pointer;
+		@apply box-content w-6 h-6 p-1 transition-colors border border-transparent rounded-md cursor-pointer text-neutral-800;
 	}
 
 	.icon svg {
@@ -58,11 +53,11 @@ main {
 	}
 
 	.selected {
-		@apply border-neutral-800 shadow-md;
+		@apply shadow-md border-neutral-800;
 	}
 
 	.card {
-		@apply w-full px-3 py-3 border flex flex-col gap-y-4 border-neutral-400 bg-neutral-200 shadow-md from-neutral-700 to-neutral-800 rounded-2xl;
+		@apply flex flex-col w-full px-3 py-3 border shadow-md gap-y-4 border-neutral-400 bg-neutral-200 from-neutral-700 to-neutral-800 rounded-2xl;
 	}
 
 	.card-main {
@@ -74,19 +69,19 @@ main {
 	}
 
 	.no-data {
-		@apply w-full py-5 mt-2 text-lg font-medium text-center border shadow-sm bg-neutral-200 text-neutral-400 border-neutral-300 rounded-xl;
+		@apply w-full py-5 mt-2 text-lg font-medium text-center border shadow-sm bg-neutral-200 text-neutral-400 border-neutral-300 rounded-xl max-w-screen-lg;
 	}
 
 	.label {
-		@apply font-medium text-neutral-600 text-lg;
+		@apply text-lg font-medium text-neutral-600;
 	}
 
 	.input {
-		@apply py-1 px-2 rounded-md border border-neutral-400 bg-white text-neutral-700 outline-neutral-500 placeholder-neutral-400 font-medium w-full text-lg;
+		@apply w-full px-2 py-1 text-lg font-medium bg-white border rounded-md border-neutral-400 text-neutral-700 outline-neutral-500 placeholder-neutral-400;
 	}
 
 	.button {
-		@apply px-3 py-1 font-semibold text-white bg-neutral-700 rounded-md shadow-md;
+		@apply px-3 py-1 font-semibold text-white rounded-md shadow-md bg-neutral-700;
 	}
 
 	.error {
@@ -94,11 +89,11 @@ main {
 	}
 
 	.popup-bg {
-		@apply fixed left-0 z-20 top-0 w-screen h-screen bg-black bg-opacity-75;
+		@apply fixed top-0 left-0 z-20 w-screen h-screen bg-black bg-opacity-75;
 	}
 
 	.popup-parent {
-		@apply py-10 absolute top-0 left-0 z-20 flex w-screen min-h-screen items-center flex-col justify-center;
+		@apply absolute top-0 left-0 z-20 flex flex-col items-center justify-center w-screen min-h-screen py-10;
 	}
 
 	.popup-fg {
@@ -111,5 +106,9 @@ main {
 
 	.link {
 		@apply underline text-neutral-500;
+	}
+
+	.custom-grid {
+		@apply w-full grid grid-cols-1 lg:grid-cols-2 gap-5;
 	}
 }

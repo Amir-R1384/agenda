@@ -18,26 +18,32 @@ export default function Cafeteria() {
 	return (
 		<>
 			<Heading title="cafeMenu" />
-			{[0, 1, 2, 3, 4].map(i => (
-				<Menu key={i} index={i} meals={meals[i]} />
-			))}
+			<div className="custom-grid">
+				{[0, 1, 2, 3, 4].map(i => (
+					<Menu key={i} index={i} meals={meals[i]} />
+				))}
+				<div className="flex flex-col w-full p-3 mt-5 mb-5 border shadow sm:my-0 border-neutral-400 bg-neutral-100 rounded-xl gap-y-3">
+					<div className="flex items-center justify-between w-full gap-x-2">
+						<FontAwesomeIcon
+							icon={faCarrot as IconProp}
+							className="!text-neutral-600 h-7"
+						/>
+						<div className="text-xs text-right text-neutral-500">{t('vege')}</div>
+					</div>
+					<div className="flex items-center justify-between w-full gap-x-2">
+						<FontAwesomeIcon
+							icon={faFish as IconProp}
+							className="!text-neutral-600 h-6"
+						/>
+						<div className="text-xs text-right text-neutral-500">
+							{t('fishOrSeafood')}
+						</div>
+					</div>
 
-			<div className="flex flex-col w-full p-3 mt-5 mb-5 border shadow border-neutral-400 bg-neutral-100 rounded-xl gap-y-3">
-				<div className="flex items-center justify-between w-full gap-x-2">
-					<FontAwesomeIcon
-						icon={faCarrot as IconProp}
-						className="!text-neutral-600 h-7"
-					/>
-					<div className="text-xs text-right text-neutral-500">{t('vege')}</div>
-				</div>
-				<div className="flex items-center justify-between w-full gap-x-2">
-					<FontAwesomeIcon icon={faFish as IconProp} className="!text-neutral-600 h-6" />
-					<div className="text-xs text-right text-neutral-500">{t('fishOrSeafood')}</div>
-				</div>
-
-				<div className="flex items-center justify-between w-full gap-x-2 mt-0.5">
-					<img src={PVT} className="h-4" />
-					<div className="text-xs text-right text-neutral-500">{t('PVT')}</div>
+					<div className="flex items-center justify-between w-full gap-x-2 mt-0.5">
+						<img src={PVT} className="h-4" />
+						<div className="text-xs text-right text-neutral-500">{t('PVT')}</div>
+					</div>
 				</div>
 			</div>
 		</>

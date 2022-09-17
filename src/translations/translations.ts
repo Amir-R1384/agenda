@@ -35,7 +35,7 @@ export default {
 			noHomework2: 'Click the button below to add a homework',
 			noRecovery: 'No recovery courses',
 			noSchedule: "You haven't created a schedule yet",
-			noSchool: 'There is no school',
+			noSchool: 'No school',
 			// Buttons
 			access: 'Access',
 			save: 'Save',
@@ -174,7 +174,7 @@ export default {
 			noHomework2: 'Clickez sur le bouton ci-dessous pour ajouter un devoir',
 			noRecovery: 'Pas de cours de récupération',
 			noSchedule: "Vous n'avez pas encore créé un horaire",
-			noSchool: "Il n'y a pas d'école",
+			noSchool: "Pas d'école",
 			// Buttons
 			access: 'Accéder',
 			save: 'Enregistrer',

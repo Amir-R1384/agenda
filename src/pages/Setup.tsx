@@ -74,40 +74,42 @@ export default function Setup() {
 	}
 
 	return (
-		<div className="flex flex-col items-center justify-between min-h-full py-20 bg-white">
-			{installNoticePopup && <InstallNotice setPopup={setInstallNoticePopup} />}
-			{installGuidePopup && <InstallGuide setPopup={setInstallGuidePopup} />}
+		<div className="w-screen h-full bg-white">
+			<div className="flex flex-col items-center justify-between max-w-screen-sm min-h-full py-20 mx-auto bg-white">
+				{installNoticePopup && <InstallNotice setPopup={setInstallNoticePopup} />}
+				{installGuidePopup && <InstallGuide setPopup={setInstallGuidePopup} />}
 
-			<img src={title} alt="Egenda" className="w-1/2" />
+				<img src={title} alt="Egenda" className="w-1/2" />
 
-			<div className="flex flex-col w-full px-5 -mt-10 gap-y-2">
-				{loading ? (
-					<Loading />
-				) : (
-					<>
-						{state === 1 ? (
-							<button
-								type="button"
-								onClick={signIn}
-								className="!py-2 button !bg-red-500 space-x-3">
-								<FontAwesomeIcon icon={faGoogle as IconProp} />
-								<span className="w-auto">{t('signInWithGoogle')}</span>
-							</button>
-						) : (
-							''
-						)}
-						{!window.matchMedia('(display-mode: standalone)').matches && (
-							<button
-								onClick={() => setInstallGuidePopup(true)}
-								className="link !py-2">
-								{t('installGuide')}
-							</button>
-						)}
-					</>
-				)}
+				<div className="flex flex-col items-center w-full px-5 -mt-10 gap-y-2">
+					{loading ? (
+						<Loading />
+					) : (
+						<>
+							{state === 1 ? (
+								<button
+									type="button"
+									onClick={signIn}
+									className="!py-2 button !bg-red-500 space-x-3 w-full sm:w-auto !px-10">
+									<FontAwesomeIcon icon={faGoogle as IconProp} />
+									<span className="w-auto">{t('signInWithGoogle')}</span>
+								</button>
+							) : (
+								''
+							)}
+							{!window.matchMedia('(display-mode: standalone)').matches && (
+								<button
+									onClick={() => setInstallGuidePopup(true)}
+									className="link !py-2">
+									{t('installGuide')}
+								</button>
+							)}
+						</>
+					)}
+				</div>
+
+				<div className="text-sm text-neutral-500">École secondaire Pierre-Laporte</div>
 			</div>
-
-			<div className="text-sm text-neutral-500">École secondaire Pierre-Laporte</div>
 		</div>
 	)
 }

@@ -28,7 +28,7 @@ export default function Settings() {
 				</div>
 			</div>
 
-			<div className="flex flex-col px-3 gap-y-5">
+			<div className="flex flex-col max-w-screen-sm px-3 mx-auto gap-y-5">
 				<button className="button !py-2" onClick={() => setSchedulePopup(true)}>
 					{t('changeSchedule')}
 				</button>

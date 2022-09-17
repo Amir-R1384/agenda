@@ -77,9 +77,13 @@ export default function Homeworks() {
 			{loading && !popup ? (
 				<Loading />
 			) : homeworks.length ? (
-				[...homeworks]
-					.sort((a, b) => a.timestamp - b.timestamp)
-					.map((homework, i) => <Homework key={i} {...homework} />)
+				<div className="custom-grid">
+					{[...homeworks]
+						.sort((a, b) => a.timestamp - b.timestamp)
+						.map((homework, i) => (
+							<Homework key={i} {...homework} />
+						))}
+				</div>
 			) : (
 				<div className="no-data">{t('noHomework2')}</div>
 			)}

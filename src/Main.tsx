@@ -1,9 +1,16 @@
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { onAuthStateChanged } from 'firebase/auth'
 import { getDoc, doc } from 'firebase/firestore'
-import { useSetRecoilState } from 'recoil'
-import { homeworksAtom, loadingAtom, recoveriesAtom, scheduleAtom, schoolDayAtom } from './atoms'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import {
+	homeworksAtom,
+	loadingAtom,
+	recoveriesAtom,
+	scheduleAtom,
+	schoolDayAtom,
+	viewportAtom
+} from './atoms'
 import { Footer, Header } from './components'
 import { getSchoolDay } from './util'
 import { usersCollection, auth } from './api'
@@ -18,6 +25,8 @@ export default function Main() {
 	const setSchedule = useSetRecoilState(scheduleAtom)
 
 	const setLoading = useSetRecoilState(loadingAtom)
+
+	const viewport = useRecoilValue(viewportAtom)
 
 	useEffect(() => {
 		const schoolDay = getSchoolDay()
@@ -48,34 +57,16 @@ export default function Main() {
 		})
 	}, [])
 
-	useEffect(() => {
-		const root = document.querySelector(':root')! as HTMLElement
-		const rootStyles = getComputedStyle(root)
-
-		const safeAreaInsetTop = Number(rootStyles.getPropertyValue('--header-height').slice(0, -2))
-		const safeAreaInsetBottom = Number(
-			rootStyles.getPropertyValue('--footer-height').slice(0, -2)
-		)
-
-		const headerHeight = document.querySelector('header')!.offsetHeight
-		const footerHeight = document.querySelector('footer')!.offsetHeight
-
-		// Stop if already corrected the height
-		if (headerHeight === safeAreaInsetTop) return
-
-		root.style.setProperty('--header-height', `${safeAreaInsetTop + headerHeight}px`)
-		root.style.setProperty('--footer-height', `${safeAreaInsetBottom + footerHeight}px`)
-	}, [])
-
 	return (
-		<>
+		<div className="flex flex-col w-full h-full flex-nowrap">
 			<Header />
-			<main className="w-full px-3 overflow-auto -z-10">
-				<div className="flex flex-col items-center gap-y-5">
+			<main className="w-full px-3 overflow-auto grow sm:flex sm:pl-0 sm:pr-5 sm:flex-1 gap-x-5">
+				{viewport === 'desktop' && <Footer />}
+				<div className="flex flex-col items-center flex-1 overflow-x-hidden overflow-y-auto gap-y-5">
 					<Outlet />
 				</div>
 			</main>
-			<Footer />
-		</>
+			{viewport === 'mobile' && <Footer />}
+		</div>
 	)
 }

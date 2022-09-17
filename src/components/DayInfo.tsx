@@ -29,7 +29,7 @@ export default function DayInfo() {
 	}, [])
 
 	return (
-		<div className="flex items-center justify-between w-full text-xs font-medium uppercase text-neutral-400">
+		<div className="flex items-center justify-between w-full text-xs font-medium uppercase sm:font-normal sm:text-sm sm:w-auto sm:gap-x-5 text-neutral-400">
 			<div>
 				{t(config.daysInWeek[dateInfo.day])}, {dateInfo.date}{' '}
 				{t(config.months[dateInfo.month])} {dateInfo.year}

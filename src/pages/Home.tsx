@@ -13,7 +13,7 @@ export default function Home() {
 	const upcomingHomeworks = homeworks
 		.filter(homework => homework.timestamp > todayTimeStamp)
 		.sort((a, b) => a.timestamp - b.timestamp)
-		.slice(0, 5)
+		.slice(0, 4)
 
 	return (
 		<>
@@ -21,7 +21,11 @@ export default function Home() {
 			{loading ? (
 				<Loading />
 			) : upcomingHomeworks.length ? (
-				upcomingHomeworks.map((homework, i) => <Homework key={i} {...homework} />)
+				<div className="custom-grid">
+					{upcomingHomeworks.map((homework, i) => (
+						<Homework key={i} {...homework} />
+					))}
+				</div>
 			) : (
 				<div className="no-data">{t('noHomework1')}</div>
 			)}

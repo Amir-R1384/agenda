@@ -41,7 +41,7 @@ export default function Schedule() {
 	return (
 		<>
 			<Heading title="schedule" />
-			<div className="flex items-center justify-between w-full px-3 overflow-visible border rounded-lg border-neutral-300">
+			<div className="flex items-center justify-between w-full max-w-screen-md px-3 overflow-visible border rounded-lg border-neutral-300">
 				<button
 					onClick={() => setPage(prev => (prev !== 0 ? ((prev - 1) as Page) : prev))}
 					className="grid place-items-center">
@@ -79,7 +79,7 @@ export default function Schedule() {
 				<Loading />
 			) : (
 				<div
-					className="flex w-screen px-3 overflow-hidden gap-x-6"
+					className="relative z-20 flex w-screen px-3 overflow-hidden gap-x-6 sm:w-full"
 					style={{ flexWrap: 'nowrap' }}>
 					{periods.map((period, i) => (
 						<div
@@ -88,26 +88,34 @@ export default function Schedule() {
 							style={{
 								transform: `translateX(calc((-100% - 1.5rem) * ${page}))`
 							}}>
-							{typeof schoolDays[i] !== 'number' ? (
-								<div className="no-data">
-									{t('noSchool')}
-									{page === 1 && t('today').toLowerCase()}
-								</div>
-							) : period ? (
-								period.map(
-									(period, i) =>
-										period && <Period key={i} index={i} {...period} />
-								)
-							) : (
-								<>
-									<div className="no-data">{t('noSchedule')}</div>
-									<button
-										onClick={() => setPopup(true)}
-										className="button !py-2 !px-10">
-										{t('addSchedule')}
-									</button>
-								</>
-							)}
+							<div className="w-full max-w-screen-lg mx-auto space-y-5">
+								{typeof schoolDays[i] !== 'number' ? (
+									<div className="no-data">
+										{t('noSchool')}{' '}
+										{t(
+											page === 0
+												? 'yesterday'
+												: page === 1
+												? 'today'
+												: 'tomorrow'
+										).toLowerCase()}
+									</div>
+								) : period ? (
+									period.map(
+										(period, i) =>
+											period && <Period key={i} index={i} {...period} />
+									)
+								) : (
+									<>
+										<div className="no-data">{t('noSchedule')}</div>
+										<button
+											onClick={() => setPopup(true)}
+											className="button !py-2 !px-10">
+											{t('addSchedule')}
+										</button>
+									</>
+								)}
+							</div>
 						</div>
 					))}
 				</div>

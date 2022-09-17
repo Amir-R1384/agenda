@@ -25,3 +25,8 @@ export const loadingAtom = atom({
 	key: 'loading',
 	default: false
 })
+
+export const viewportAtom = atom<'mobile' | 'desktop'>({
+	key: 'viewportAtom',
+	default: 'mobile'
+})
