@@ -2,7 +2,6 @@ export type SchoolDay = 'we' | 'c' | 'jp' | number | undefined
 
 export type Day = 'c' | 'we' | 'jp' | number
 export type Schedule<T> = { [key: number]: (null | { subject: T; roomNumber: T })[] }
-export type Page = 0 | 1 | 2 // Yesterday, today, tomorrow (for the schedule page)
 
 export type Homework = {
 	id: number
