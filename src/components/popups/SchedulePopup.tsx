@@ -11,10 +11,9 @@ import { getData, saveData } from '../../lib'
 interface Params {
 	visible: boolean
 	setVisible: React.Dispatch<React.SetStateAction<boolean>>
-	changing?: boolean
 }
 
-export default function SchedulePopup({ visible, setVisible, changing }: Params) {
+export default function SchedulePopup({ visible, setVisible }: Params) {
 	const { t } = useTranslation()
 	const [loading, setLoading] = useRecoilState(loadingAtom)
 	const [inputs, setInputs] = useState<Schedule<string>>(generateEmptySchedule<string>())
@@ -24,21 +23,19 @@ export default function SchedulePopup({ visible, setVisible, changing }: Params)
 
 	useEffect(() => {
 		// Filling in the forms if there is a existing schedule
-		if (changing) {
-			getData('schedule').then((data: Schedule<string>) => {
-				for (let i = 0; i < 9; i++) {
-					for (let j = 0; j < 9; j++) {
-						if (data[i][j] === null) {
-							data[i][j] = {
-								subject: 'default',
-								roomNumber: ''
-							}
+		getData('schedule').then((data: Schedule<string>) => {
+			for (let i = 0; i < 9; i++) {
+				for (let j = 0; j < 9; j++) {
+					if (data[i][j] === null) {
+						data[i][j] = {
+							subject: 'default',
+							roomNumber: ''
 						}
 					}
 				}
-				setInputs(data)
-			})
-		}
+			}
+			setInputs(data)
+		})
 	}, [])
 
 	function onInputChange(
@@ -156,7 +153,7 @@ export default function SchedulePopup({ visible, setVisible, changing }: Params)
 				{loading && <Loading forPopup={true} />}
 
 				<button type="submit" className="button">
-					{t(changing ? 'save' : 'add')}
+					{t('save')}
 				</button>
 			</div>
 		</Popup>

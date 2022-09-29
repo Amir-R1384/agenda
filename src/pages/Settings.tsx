@@ -39,11 +39,7 @@ export default function Settings() {
 			</div>
 
 			{schedulePopup && (
-				<SchedulePopup
-					visible={schedulePopup}
-					setVisible={setSchedulePopup}
-					changing={true}
-				/>
+				<SchedulePopup visible={schedulePopup} setVisible={setSchedulePopup} />
 			)}
 		</>
 	)

@@ -110,7 +110,7 @@ export default function Schedule() {
 										<div className="no-data">{t('noSchedule')}</div>
 										<button
 											onClick={() => setPopup(true)}
-											className="button !py-2 !px-10">
+											className="button !py-2 !px-10 mx-auto block">
 											{t('addSchedule')}
 										</button>
 									</>
