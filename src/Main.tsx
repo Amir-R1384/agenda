@@ -66,7 +66,7 @@ export default function Main() {
 			<Header />
 			<main className="w-full px-3 overflow-auto grow sm:flex sm:pl-0 sm:pr-5 sm:flex-1 gap-x-5">
 				{viewport === 'desktop' && <Footer />}
-				<div className="flex flex-col items-center flex-1 overflow-x-hidden overflow-y-auto gap-y-5">
+				<div className="flex flex-col items-center flex-1 min-h-full overflow-x-hidden overflow-y-auto gap-y-5">
 					<Outlet />
 				</div>
 			</main>
