@@ -79,7 +79,13 @@ export default function Homeworks() {
 			) : homeworks.length ? (
 				<div className="custom-grid">
 					{[...homeworks]
-						.sort((a, b) => a.timestamp - b.timestamp)
+						.sort((a, b) => {
+							if (a.timestamp !== b.timestamp) {
+								return a.timestamp - b.timestamp
+							} else {
+								return a.period - b.period
+							}
+						})
 						.map((homework, i) => (
 							<Homework key={i} {...homework} />
 						))}

@@ -12,7 +12,13 @@ export default function Home() {
 	const todayTimeStamp = new Date(getToday()).valueOf()
 	const upcomingHomeworks = homeworks
 		.filter(homework => homework.timestamp > todayTimeStamp)
-		.sort((a, b) => a.timestamp - b.timestamp)
+		.sort((a, b) => {
+			if (a.timestamp !== b.timestamp) {
+				return a.timestamp - b.timestamp
+			} else {
+				return a.period - b.period
+			}
+		})
 		.slice(0, 4)
 
 	return (
