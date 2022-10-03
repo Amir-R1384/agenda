@@ -13,7 +13,7 @@ export default {
 			ECR: 'ECR',
 			chemistry: 'Chemistry',
 			physics: 'Physics',
-			mondeEducF: 'World - Financial education',
+			mondeEducF: 'World - Financial Education',
 			psychology: 'Psychology',
 			entrepreneurship: 'Entrepreneurship',
 			// Day types
@@ -75,7 +75,7 @@ export default {
 			periodOrSubject: 'Period or subject...',
 			settings: 'Settings',
 			// Days
-			sun: 'Sundy',
+			sun: 'Sunday',
 			mon: 'Monday',
 			tue: 'Tuesday',
 			wed: 'Wednesday',
