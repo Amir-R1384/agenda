@@ -25,7 +25,10 @@ export interface Meal {
 export interface Config {
 	appPrefix: string
 	times: string[]
+	sanityProjectId: string
 	beginingDay: string
+	fallbackLng: string
+	supportedLngs: string[]
 	subjects: string[]
 	classes: number[]
 	daysInWeek: string[]
@@ -49,4 +52,11 @@ export interface RecoveryInputs {
 export interface Popup {
 	visible: boolean
 	children: JSX.Element[]
+}
+
+export interface News {
+	title: string
+	content: string
+	image: string
+	date: string
 }

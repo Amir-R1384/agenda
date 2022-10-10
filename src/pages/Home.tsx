@@ -1,12 +1,15 @@
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useRecoilValue } from 'recoil'
-import { homeworksAtom, loadingAtom } from '../atoms'
-import { Heading, Homework, Loading } from '../components'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { homeworksAtom, loadingAtom, newsAtom } from '../atoms'
+import { Heading, Homework, Loading, News } from '../components'
 import { getToday } from '../util'
+import { sanityClient, newsQuery } from '../api/sanity'
 
 export default function Home() {
 	const homeworks = useRecoilValue(homeworksAtom)
 	const loading = useRecoilValue(loadingAtom)
+	const [news, setNews] = useRecoilState(newsAtom)
 	const { t } = useTranslation()
 
 	const todayTimeStamp = new Date(getToday()).valueOf()
@@ -21,8 +24,26 @@ export default function Home() {
 		})
 		.slice(0, 4)
 
+	useEffect(() => {
+		if (news === null) {
+			sanityClient.fetch(newsQuery).then(result => {
+				setNews(result)
+			})
+		}
+	}, [news])
+
 	return (
 		<>
+			<Heading title="recentNews" />
+			{news?.length ? (
+				<div className="custom-grid">
+					{news.map((news, i) => (
+						<News key={i} {...news} />
+					))}
+				</div>
+			) : (
+				!loading && <div className="no-data">{t('noNews')}</div>
+			)}
 			<Heading title="upComing" />
 			{loading ? (
 				<Loading />
@@ -35,6 +56,7 @@ export default function Home() {
 			) : (
 				<div className="no-data">{t('noHomework1')}</div>
 			)}
+			<div></div>
 		</>
 	)
 }

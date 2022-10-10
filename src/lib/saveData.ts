@@ -1,5 +1,5 @@
 import { updateDoc, doc } from 'firebase/firestore'
-import { auth, usersCollection } from '../api'
+import { auth, usersCollection } from '../api/firebase'
 import saveToLS from './saveToLS'
 
 // Always assuming the user is logged in

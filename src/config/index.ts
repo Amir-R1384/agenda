@@ -6,6 +6,10 @@ const config: Config = {
 	appPrefix: 'egenda',
 	beginingDay: '8/29/2022',
 
+	sanityProjectId: 'sq5zpcem',
+	fallbackLng: 'en',
+	supportedLngs: ['en', 'fr'],
+
 	daysInWeek: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'],
 	months: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
 	subjects: [

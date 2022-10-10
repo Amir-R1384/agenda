@@ -1,5 +1,5 @@
 import { getDoc, doc } from 'firebase/firestore'
-import { auth, usersCollection } from '../api'
+import { auth, usersCollection } from '../api/firebase'
 import config from '../config'
 import saveToLS from './saveToLS'
 

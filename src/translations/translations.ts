@@ -26,6 +26,7 @@ export default {
 			upComing: 'Upcoming homeworks',
 			recoveries: 'Recovery courses',
 			cafeMenu: 'Cafeteria menu',
+			recentNews: 'Recent news',
 			// Food related
 			PVT: 'Textured vegetable proteins (contains soya)',
 			vege: "Doesn't contain meat",
@@ -36,6 +37,7 @@ export default {
 			noRecovery: 'No recovery courses',
 			noSchedule: "You haven't created a schedule yet",
 			noSchool: 'No school',
+			noNews: 'No important news for now',
 			// Buttons
 			access: 'Access',
 			save: 'Save',
@@ -165,6 +167,7 @@ export default {
 			upComing: 'Les devoirs à venir',
 			recoveries: 'Récupérations',
 			cafeMenu: 'Menu de la caféteria',
+			recentNews: 'Nouvelles récentes',
 			// Food related
 			PVT: 'Protéins végétales texturées (contient du soya)',
 			vege: 'Sans viande',
@@ -175,6 +178,7 @@ export default {
 			noRecovery: 'Pas de cours de récupération',
 			noSchedule: "Vous n'avez pas encore créé un horaire",
 			noSchool: "Pas d'école",
+			noNews: "Pas de nouvelles importantes pour l'instant",
 			// Buttons
 			access: 'Accéder',
 			save: 'Enregistrer',
