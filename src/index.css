@@ -69,7 +69,7 @@ footer {
 	}
 
 	.no-data {
-		@apply w-full py-5 mt-2 text-lg font-medium text-center border shadow-sm bg-gradient-to-br from-neutral-200 to-neutral-300 text-neutral-400 border-neutral-300 rounded-xl max-w-screen-lg;
+		@apply w-full py-5 mt-2 text-lg font-medium text-center border shadow-sm bg-gradient-to-br from-neutral-200 via-neutral-300 to-neutral-200 text-neutral-400 border-neutral-300 rounded-xl max-w-screen-lg;
 	}
 
 	.label {

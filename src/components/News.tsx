@@ -16,7 +16,7 @@ export default function News({ title, content, image, date }: Params) {
 
 	return (
 		<>
-			<div className="card !bg-neutral-50 !shadow !border-neutral-300 !gap-y-2 !flex-row gap-x-2 items-center">
+			<div className="card !from-neutral-50 !to-neutral-50 !shadow !border-neutral-300 !gap-y-2 !flex-row gap-x-2 items-center">
 				<div className="flex-1 space-y-2">
 					<div className="text-lg font-semibold text-neutral-700 drop-shadow-md">
 						{title}
