@@ -68,8 +68,11 @@ export default function Setup() {
 				})
 				setLoading(false)
 			}
-		} catch (err) {
-			console.error(err)
+		} catch (err: any) {
+			if (err.code !== 'auth/popup-closed-by-user') {
+				alert(t('problem'))
+			}
+			setLoading(false)
 		}
 	}
 

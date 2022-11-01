@@ -76,6 +76,7 @@ export default {
 			homeworkDescription: 'Homework description...',
 			periodOrSubject: 'Period or subject...',
 			settings: 'Settings',
+			problem: 'Something went wrong! Please try again later',
 			// Days
 			sun: 'Sunday',
 			mon: 'Monday',
@@ -218,6 +219,7 @@ export default {
 			homeworkDescription: 'Description du devoir...',
 			periodOrSubject: 'Période ou matière...',
 			settings: 'Paramètres',
+			problem: 'Il y a eu un problème! Veuillez ressayer plus tard',
 			// Days
 			sun: 'Dimanche',
 			mon: 'Lundi',
