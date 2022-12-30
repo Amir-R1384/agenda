@@ -1,19 +1,19 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { Popup, Loading, Accordion } from '../'
+import { Accordion, Popup, Select } from '../'
 import { loadingAtom, scheduleAtom } from '../../atoms'
-import { Schedule } from '../../types'
-import { generateEmptySchedule, getPeriod } from '../../util'
 import config from '../../config'
 import { getData, saveData } from '../../lib'
+import { Schedule } from '../../types'
+import { generateEmptySchedule, getPeriod } from '../../util'
 
-interface Params {
+interface Props {
 	visible: boolean
 	setVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function SchedulePopup({ visible, setVisible }: Params) {
+export default function SchedulePopup({ visible, setVisible }: Props) {
 	const { t } = useTranslation()
 	const [loading, setLoading] = useRecoilState(loadingAtom)
 	const [inputs, setInputs] = useState<Schedule<string>>(generateEmptySchedule<string>())
@@ -92,67 +92,83 @@ export default function SchedulePopup({ visible, setVisible }: Params) {
 	}, [])
 
 	return (
-		<Popup visible={visible} fullScreen onSubmit={onSubmit}>
-			{Array(9)
-				.fill(null)
-				.map((el, i) => (
-					// * 1 Accordion
-					<Accordion
-						key={i}
-						index={i}
-						open={accordions[i]}
-						setAccordions={setAccordions}
-						title={`${t('day')} ${i + 1}`}>
-						<div className="flex flex-col w-full gap-y-5">
-							{Array(9)
-								.fill(null)
-								.map((el, j) => (
-									// * 1 Period
-									<div
-										key={j}
-										className="flex flex-col w-full p-2 px-3 rounded-lg bg-neutral-200 gap-y-2">
-										<div className="font-medium text-neutral-500">
-											{t(getPeriod(j).type)} {getPeriod(j).number}
+		<Popup visible={visible} setVisible={setVisible} fullScreen>
+			<div className="pt-10 space-y-3">
+				{Array(9)
+					.fill(null)
+					.map((el, i) => (
+						// * 1 Accordion
+						<Accordion
+							key={i}
+							index={i}
+							open={accordions[i]}
+							setAccordions={setAccordions}
+							title={`${t('day')} ${i + 1}`}>
+							<div className="flex flex-col w-full gap-y-5">
+								{Array(9)
+									.fill(null)
+									.map((el, j) => (
+										// * 1 Period
+										<div
+											key={j}
+											className={`overflow-hidden border rounded ${
+												(errors[i][j]?.subject ||
+													errors[i][j]?.roomNumber) &&
+												'!border-red-500'
+											} outline-container border-neutral-500`}>
+											<div className="py-1 pl-5 text-lg text-dark-1">
+												{t(getPeriod(j).type)} {getPeriod(j).number}
+											</div>
+											<div className="flex outline-container !border-b-0">
+												{/* Subject input */}
+												<Select
+													id={`subject${j}`}
+													value={inputs[i][j]?.subject}
+													onChange={e =>
+														onInputChange(e, i, j, 'subject')
+													}
+													className="flex-1 outline-hover"
+													error={errors[i][j]!.subject}>
+													<option value="default">{t('subject')}</option>
+													{config.subjects.map((subject, k) => (
+														<option key={k} value={subject}>
+															{t(subject)}
+														</option>
+													))}
+												</Select>
+												<div className="w-px py-5 bg-neutral-400"></div>
+
+												{/* Room number input */}
+												<input
+													value={inputs[i][j]?.roomNumber || ''}
+													onChange={e =>
+														onInputChange(e, i, j, 'roomNumber')
+													}
+													type="text"
+													className={`outline-hover max-w-[50%] pl-5 ${
+														errors[i][j]!.roomNumber && 'error'
+													}`}
+													placeholder={t('roomNumber')}
+												/>
+											</div>
 										</div>
-										<div className="flex items-stretch justify-between w-full gap-2">
-											{/* Subject input */}
-											<select
-												value={inputs[i][j]?.subject}
-												onChange={e => onInputChange(e, i, j, 'subject')}
-												className={`input !text-base font-normal ${
-													errors[i][j]!.subject && 'error'
-												}`}>
-												<option value="default">{t('subject')}</option>
-												{config.subjects.map((subject, k) => (
-													<option key={k} value={subject}>
-														{t(subject)}
-													</option>
-												))}
-											</select>
-											{/* Room number input */}
-											<input
-												value={inputs[i][j]?.roomNumber || ''}
-												onChange={e => onInputChange(e, i, j, 'roomNumber')}
-												type="text"
-												className={`input !text-sm  ${
-													errors[i][j]!.roomNumber && 'error'
-												}`}
-												placeholder={t('roomNumber')}
-											/>
-										</div>
-									</div>
-								))}
-						</div>
-					</Accordion>
-				))}
-			<div className="flex items-center justify-between w-full mt-2">
-				<button type="button" onClick={() => setVisible(false)} className="button">
+									))}
+							</div>
+						</Accordion>
+					))}
+			</div>
+
+			<div className="flex mt-6 mb-20 outline-container">
+				<button
+					type="button"
+					onClick={() => setVisible(false)}
+					className="flex-1 transition-all outline-spacing outline-hover">
 					{t('cancel')}
 				</button>
-
-				{loading && <Loading forPopup={true} />}
-
-				<button type="submit" className="button">
+				<div className="w-px py-5 bg-neutral-400"></div>
+				<button
+					onClick={onSubmit}
+					className="flex-1 transition-all outline-spacing outline-hover">
 					{t('save')}
 				</button>
 			</div>

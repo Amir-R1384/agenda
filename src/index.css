@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;900&display=swap');
 @tailwind base;
+@tailwind components;
 @tailwind utilities;
 
 * {
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Work Sans', sans-serif;
 }
 
 :root {
@@ -12,103 +13,153 @@
 }
 
 body {
-	@apply bg-neutral-100;
+	@apply bg-neutral-100 overflow-hidden;
 	user-select: none;
 	-webkit-user-select: none;
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
 }
 
-header {
-	background: rgb(255, 255, 255);
-	background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 100%);
-}
-
 footer {
 	padding-bottom: calc(env(safe-area-inset-bottom) + 10px);
 }
 
-@layer utilities {
-	.noSelect {
-		-webkit-tap-highlight-color: transparent;
-		-webkit-tap-highlight-color: transparent;
-		-webkit-touch-callout: none;
-		-webkit-user-select: none;
-		-khtml-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
+@layer components {
+	.button {
+		@apply cursor-pointer px-5 py-2 text-center;
 	}
 
-	.noSelect:focus {
-		outline: none !important;
+	.button-filled {
+		@apply button bg-dark-1 border border-dark-1 transition-all text-white font-medium shadow-md rounded-md;
+	}
+
+	.button-outline {
+		@apply button border border-dark-2 text-dark-2 transition-all font-medium  rounded-md;
 	}
 
 	.icon {
-		@apply box-content w-6 h-6 p-1 transition-colors border border-transparent rounded-md cursor-pointer text-neutral-800;
+		@apply text-dark-1 w-8 transition-all p-0.5 rounded-md cursor-pointer;
 	}
 
-	.icon svg {
-		@apply drop-shadow-md;
-	}
-
-	.selected {
-		@apply shadow-md border-neutral-800;
+	.icon:active {
+		@apply scale-125 !bg-transparent;
 	}
 
 	.card {
-		@apply flex flex-col w-full px-3 py-3 border shadow-md gap-y-4 border-neutral-400 bg-gradient-to-br from-neutral-200 to-neutral-300 rounded-2xl;
+		@apply bg-[rgb(248,248,248)] rounded-xl p-3 space-y-4 border border-neutral-300;
 	}
 
-	.card-main {
-		@apply text-xl font-semibold text-neutral-700 drop-shadow-md;
+	.card.hover {
+		@apply cursor-pointer transition-all;
+	}
+
+	.card.hover:active {
+		@apply brightness-90;
 	}
 
 	.card-sub {
-		@apply text-sm text-neutral-500;
+		@apply text-dark-2 text-xs;
 	}
 
-	.no-data {
-		@apply w-full py-5 mt-2 text-lg font-medium text-center border shadow-sm bg-gradient-to-br from-neutral-200 via-neutral-300 to-neutral-200 text-neutral-400 border-neutral-300 rounded-xl max-w-screen-lg;
+	.card-main {
+		@apply text-dark-1 text-xl font-medium;
 	}
 
-	.label {
-		@apply text-lg font-medium text-neutral-600;
+	.form-title {
+		@apply text-xl mb-5 pt-5 pl-5  text-dark-1;
 	}
 
-	.input {
-		@apply w-full px-2 py-1 text-lg font-medium bg-white border rounded-md border-neutral-400 text-neutral-700 outline-neutral-500 placeholder-neutral-400;
+	.form-label {
+		@apply text-lg text-dark-1 font-medium pl-5;
 	}
 
-	.button {
-		@apply px-3 py-1 font-semibold text-white rounded-md shadow-md bg-neutral-700;
+	.outline-container {
+		@apply border-y border-neutral-400 w-full bg-popup;
+	}
+
+	.outline-hover {
+		@apply transition-all bg-popup;
+	}
+
+	.outline-hover:active {
+		@apply !brightness-90;
+	}
+
+	.outline-spacing {
+		@apply px-5 py-2;
+	}
+
+	.tag {
+		@apply py-1 px-3 bg-neutral-300 text-neutral-500 inline rounded-md;
+	}
+
+	input,
+	textarea,
+	select {
+		@apply outline-none bg-transparent text-dark-1 placeholder-neutral-500;
+	}
+
+	@media (hover: hover) {
+		.button-filled:hover,
+		.button-outline:hover {
+			@apply shadow-lg scale-[101%];
+		}
+
+		.icon:hover {
+			@apply bg-neutral-100;
+		}
+
+		.outline-hover:hover {
+			@apply brightness-95;
+		}
+
+		.card.hover:hover {
+			@apply brightness-95;
+		}
+
+		.days-checkbox:hover {
+			@apply brightness-95;
+		}
+	}
+}
+
+@layer utilities {
+	.flex-space-between {
+		@apply flex items-center justify-between w-full;
 	}
 
 	.error {
-		@apply !border-2 !border-red-500 !outline-red-500;
+		@apply border-red-600;
 	}
+}
 
-	.popup-bg {
-		@apply fixed top-0 left-0 z-20 w-screen h-screen bg-black bg-opacity-75;
-	}
+.noSelect {
+	-webkit-tap-highlight-color: transparent;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 
-	.popup-parent {
-		@apply absolute top-0 left-0 z-20 flex flex-col items-center justify-center w-screen min-h-screen py-10;
-	}
+.noSelect:focus {
+	outline: none !important;
+}
 
-	.popup-fg {
-		@apply flex flex-col items-start w-11/12 max-w-md p-3 rounded-lg bg-neutral-100 gap-y-4;
-	}
+.no-data {
+	@apply card !bg-neutral-200 text-neutral-500 text-center border-none max-w-screen-lg mx-auto;
+}
 
-	.installGuide-img {
-		@apply w-4/5 ml-2 border-2 rounded-md shadow-md border-neutral-500;
-	}
+.label {
+	@apply text-lg font-medium text-neutral-600;
+}
 
-	.link {
-		@apply underline text-neutral-500;
-	}
+.installGuide-img {
+	@apply mb-7 border-2 rounded-md border-neutral-500;
+}
 
-	.custom-grid {
-		@apply w-full grid grid-cols-1 lg:grid-cols-2 gap-5;
-	}
+.custom-grid {
+	@apply w-full grid grid-cols-1 lg:grid-cols-2 gap-3;
 }

@@ -1,6 +1,6 @@
+import { Config } from '../types'
 import days from './days'
 import menu from './menu'
-import { Config } from '../types'
 
 const config: Config = {
 	appPrefix: 'egenda',

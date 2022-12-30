@@ -1,54 +1,42 @@
-import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
-import { faGoogle } from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { auth, signIn as FB_signIn, usersCollection } from '../api/firebase'
-import { loadingAtom } from '../atoms'
-import { InstallGuide, InstallNotice, Loading } from '../components'
-import title from '../assets/images/title.png'
+import design from '../assets/images/design.svg'
+import { loadingAtom, viewportAtom } from '../atoms'
+import { InstallGuide, Loading } from '../components'
+import { getBrowser } from '../util'
 
 export default function Setup() {
 	const navigate = useNavigate()
 
 	const [state, setState] = useState<0 | 1>(0) // 0: Welcome screen, 1: Sign In
-	const [loading, setLoading] = useRecoilState(loadingAtom)
+	const setLoading = useSetRecoilState(loadingAtom)
 
-	const [installNoticePopup, setInstallNoticePopup] = useState(false)
 	const [installGuidePopup, setInstallGuidePopup] = useState(false)
+
+	const isPWA = window.matchMedia('(display-mode: standalone)').matches
+	const viewport = useRecoilValue(viewportAtom)
+	const browser = getBrowser(navigator)
 
 	const { t } = useTranslation()
 
 	// * Checking the user's authentication status
 	useEffect(() => {
 		setLoading(true)
-
 		const unsubscribe = onAuthStateChanged(auth, async user => {
 			if (!user) {
 				setState(1) // Show sign up button
 			} else {
 				navigate('/app/')
 			}
-			setLoading(false)
+			// setLoading(false)
 			unsubscribe()
 		})
 	}, [])
-
-	// * Showing install message
-	useEffect(() => {
-		if (
-			state !== 0 &&
-			!localStorage.installNoticeShown &&
-			!window.matchMedia('(display-mode: standalone)').matches
-		) {
-			setInstallNoticePopup(true)
-			localStorage.installNoticeShown = true
-		}
-	}, [state, localStorage])
 
 	async function signIn() {
 		try {
@@ -77,42 +65,60 @@ export default function Setup() {
 	}
 
 	return (
-		<div className="w-screen h-full bg-white">
-			<div className="flex flex-col items-center justify-between max-w-screen-sm min-h-full py-20 mx-auto bg-white">
-				{installNoticePopup && <InstallNotice setPopup={setInstallNoticePopup} />}
-				{installGuidePopup && <InstallGuide setPopup={setInstallGuidePopup} />}
+		<>
+			<header className="px-5 py-2 bg-white border-b md:px-10 flex-space-between border-neutral-200">
+				<div className="text-xl font-bold md:text-2xl text-dark drop-shadow-md">Egenda</div>
+				<Loading />
+			</header>
 
-				<img src={title} alt="Egenda" className="w-1/2" />
-
-				<div className="flex flex-col items-center w-full px-5 -mt-10 gap-y-2">
-					{loading ? (
-						<Loading />
-					) : (
-						<>
-							{state === 1 ? (
-								<button
-									type="button"
-									onClick={signIn}
-									className="!py-2 button !bg-red-500 space-x-3 w-full sm:w-auto !px-10">
-									<FontAwesomeIcon icon={faGoogle as IconProp} />
-									<span className="w-auto">{t('signInWithGoogle')}</span>
+			<main
+				className={`transition-all px-5 md:px-10 mt-10 opacity-0 duration-500 ${
+					state === 1 && '!opacity-100'
+				}`}>
+				<div className="flex justify-between w-full gap-x-10">
+					<div className="w-full text-center md:w-1/2 md:text-left">
+						<div className="my-10 text-3xl font-black md:text-6xl drop-shadow-md">
+							Your entire agenda in your pocket
+						</div>
+						<div className="mb-5 md:mb-10 text-dark-2">
+							<span>Egenda</span> is made to replace your school agenda and to make
+							daily school tasks much easier.
+						</div>
+						<div className="flex flex-col items-center gap-3 md:flex-row">
+							{isPWA ? (
+								<button onClick={signIn} className="button-filled">
+									Sign In With Google
 								</button>
+							) : browser !== 'other' ? (
+								<>
+									<button
+										onClick={() => setInstallGuidePopup(true)}
+										className="button-filled">
+										Install mobile app
+									</button>
+									<div onClick={signIn} className="button-outline">
+										Continue in browser
+									</div>
+								</>
 							) : (
-								''
+								<>
+									<button onClick={signIn} className="button-filled">
+										Sign In With Google
+									</button>
+									<button
+										onClick={() => setInstallGuidePopup(true)}
+										className="button-outline">
+										Install mobile app
+									</button>
+								</>
 							)}
-							{!window.matchMedia('(display-mode: standalone)').matches && (
-								<button
-									onClick={() => setInstallGuidePopup(true)}
-									className="link !py-2">
-									{t('installGuide')}
-								</button>
-							)}
-						</>
-					)}
+						</div>
+					</div>
+					<img className="hidden mr-20 md:block" src={design} alt="Design" />
 				</div>
+			</main>
 
-				<div className="text-sm text-neutral-500">École secondaire Pierre-Laporte</div>
-			</div>
-		</div>
+			<InstallGuide visible={installGuidePopup} setVisible={setInstallGuidePopup} />
+		</>
 	)
 }

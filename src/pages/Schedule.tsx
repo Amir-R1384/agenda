@@ -1,14 +1,12 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
-import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { ChevronLeftOutline, ChevronRightOutline } from '@graywolfai/react-heroicons'
 import { useLayoutEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRecoilValue } from 'recoil'
 import { loadingAtom, scheduleAtom } from '../atoms'
-import { Period, Heading, Loading } from '../components'
+import { CardContainer, Loading, Period } from '../components'
 import SchedulePopup from '../components/popups/SchedulePopup'
-import { getSchoolDay } from '../util'
 import config from '../config'
+import { getSchoolDay } from '../util'
 
 type PeriodState = null | (null | { subject: string; roomNumber: string })[]
 
@@ -42,55 +40,50 @@ export default function Schedule() {
 
 	return (
 		<>
-			<Heading title="schedule" />
-
-			<div className="flex items-center justify-between w-full max-w-screen-md px-3 overflow-visible border rounded-lg border-neutral-300">
-				<button onClick={() => changeDate('previous')} className="grid place-items-center">
-					<FontAwesomeIcon
-						className="w-4 h-8 drop-shadow-md"
-						icon={faCaretLeft as IconProp}
-					/>
-				</button>
-				<div className="text-neutral-600">
-					{currentDate.toDateString() === new Date().toDateString()
-						? t('today')
-						: currentDate.getDate() +
-						  ' ' +
-						  t(config.months[currentDate.getMonth()]) +
-						  ' - ' +
-						  (currentSchoolDay === undefined
-								? t('notInList')
-								: typeof currentSchoolDay === 'number'
-								? `${t('day')} ${currentSchoolDay}`
-								: t(currentSchoolDay as string))}
-				</div>
-				<button onClick={() => changeDate('next')} className="grid place-items-center">
-					<FontAwesomeIcon
-						className="w-4 h-8 drop-shadow-md"
-						icon={faCaretRight as IconProp}
-					/>
-				</button>
-			</div>
-
-			{loading ? (
-				<Loading />
-			) : periods ? (
-				<div className="flex flex-col items-stretch w-full max-w-screen-lg gap-y-5">
-					{periods.map((period, i) => period && <Period key={i} index={i} {...period} />)}
-				</div>
-			) : typeof currentSchoolDay == 'number' ? (
-				<>
-					<div className="no-data">{t('noSchedule')}</div>
-					<button
-						onClick={() => setPopup(true)}
-						className="button !py-2 !px-10 mx-auto block">
-						{t('addSchedule')}
+			<CardContainer heading="schedule">
+				<div className="max-w-screen-md mx-auto mb-5 overflow-visible border rounded-lg bg-neutral-50 flex-space-between border-neutral-300">
+					<button onClick={() => changeDate('previous')}>
+						<ChevronLeftOutline className="icon" />
 					</button>
-				</>
-			) : (
-				<div className="no-data">{t('noSchool')}</div>
-			)}
-			{popup && <SchedulePopup visible={popup} setVisible={setPopup} />}
+					<div className="text-dark-1">
+						{currentDate.toDateString() === new Date().toDateString()
+							? t('today')
+							: currentDate.getDate() +
+							  ' ' +
+							  t(config.months[currentDate.getMonth()]) +
+							  ' - ' +
+							  (currentSchoolDay === undefined
+									? t('notInList')
+									: typeof currentSchoolDay === 'number'
+									? `${t('day')} ${currentSchoolDay}`
+									: t(currentSchoolDay as string))}
+					</div>
+					<button onClick={() => changeDate('next')}>
+						<ChevronRightOutline className="icon" />
+					</button>
+				</div>
+
+				{loading ? (
+					<Loading />
+				) : periods ? (
+					<div className="custom-grid !grid-cols-1 max-w-screen-lg mx-auto">
+						{periods.map(
+							(period, i) => period && <Period key={i} index={i} {...period} />
+						)}
+					</div>
+				) : typeof currentSchoolDay == 'number' ? (
+					<div className="flex flex-col items-center gap-y-3">
+						<div className="w-full no-data">{t('noSchedule')}</div>
+						<button onClick={() => setPopup(true)} className="button-filled !bg-dark-2">
+							{t('addSchedule')}
+						</button>
+					</div>
+				) : (
+					<div className="no-data">{t('noSchool')}</div>
+				)}
+			</CardContainer>
+
+			<SchedulePopup visible={popup} setVisible={setPopup} />
 		</>
 	)
 }

@@ -1,4 +1,4 @@
-import { updateDoc, doc } from 'firebase/firestore'
+import { doc, updateDoc } from 'firebase/firestore'
 import { auth, usersCollection } from '../api/firebase'
 import saveToLS from './saveToLS'
 

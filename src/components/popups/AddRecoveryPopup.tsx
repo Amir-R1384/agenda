@@ -1,18 +1,24 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import Popup from './Popup'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { loadingAtom, recoveriesAtom } from '../../atoms'
+import config from '../../config'
+import { defaultRecoveryInputs } from '../../config/defaults'
+import { saveData } from '../../lib'
+import i18n from '../../translations'
 import { RecoveryInputs } from '../../types'
 import Loading from '../Loading'
-import { useRecoilValue } from 'recoil'
-import { loadingAtom } from '../../atoms'
-import config from '../../config'
+import Select from '../Select'
+import Popup from './Popup'
 
-interface Params {
+interface Props {
 	visible: boolean
 	setVisible: React.Dispatch<React.SetStateAction<boolean>>
 	inputs: RecoveryInputs
 	setInputs: React.Dispatch<React.SetStateAction<RecoveryInputs>>
 	addRecovery: () => Promise<void>
+	editMode: boolean
+	currentRecoveryId: number
 }
 
 export default function AddRecoveryPopup({
@@ -20,41 +26,35 @@ export default function AddRecoveryPopup({
 	setVisible,
 	inputs,
 	setInputs,
-	addRecovery
-}: Params) {
+	addRecovery,
+	editMode,
+	currentRecoveryId
+}: Props) {
 	const { t } = useTranslation()
 
 	const [errors, setErrors] = useState({
 		subject: false,
 		roomNumber: false,
-		day: false
+		days: false
 	})
-	const loading = useRecoilValue(loadingAtom)
-
-	function checkDayInput(num: string) {
-		return num === '' || (Number(num) >= 1 && Number(num) <= 9)
-	}
-
-	function clearInputs() {
-		setInputs({
-			subject: '',
-			roomNumber: '',
-			day: ''
-		})
-	}
 
 	function clearErrors() {
 		setErrors({
 			subject: false,
 			roomNumber: false,
-			day: false
+			days: false
 		})
 	}
+
+	const [recoveries, setRecoveries] = useRecoilState(recoveriesAtom)
+	const setLoading = useSetRecoilState(loadingAtom)
 
 	function checkInputs() {
 		return new Promise<void>((resolve, reject) => {
 			if (inputs.subject === 'default') return reject('subject')
-			if (!checkDayInput(inputs.day) || inputs.day === '') return reject('day')
+			if (inputs.days.every(day => day === false)) {
+				reject('days')
+			}
 			resolve()
 		})
 	}
@@ -65,7 +65,7 @@ export default function AddRecoveryPopup({
 			.then(() => {
 				addRecovery().then(() => {
 					setVisible(false)
-					clearInputs()
+					setInputs(defaultRecoveryInputs)
 				})
 			})
 			.catch(error => {
@@ -73,52 +73,135 @@ export default function AddRecoveryPopup({
 			})
 	}
 
+	async function deleteRecovery() {
+		setLoading(true)
+		const newRecoveries = [...recoveries]
+
+		const currentRecovery = newRecoveries.find(obj => obj.id === currentRecoveryId)!
+		newRecoveries.splice(newRecoveries.indexOf(currentRecovery), 1)
+
+		await saveData('recoveries', newRecoveries)
+		setRecoveries(newRecoveries)
+		setLoading(false)
+		setVisible(false)
+	}
+
 	return (
-		<Popup onSubmit={onSubmit} visible={visible}>
-			<select
-				value={inputs.subject}
-				onChange={e => setInputs(prev => ({ ...prev, subject: e.target.value }))}
-				className={`input ${errors.subject && 'error'}`}>
-				<option value="default">{t('subject')}</option>
-				{config.subjects.map((subject, k) => (
-					<option key={k} value={subject}>
-						{t(subject)}
-					</option>
-				))}
-			</select>
-			<input
-				className={`input ${errors.roomNumber && 'error'}`}
-				placeholder={t('roomNumber')}
-				value={inputs.roomNumber}
-				onChange={e => setInputs(prev => ({ ...prev, roomNumber: e.target.value }))}
-			/>
-			<input
-				className={`input ${errors.day && 'error'}`}
-				placeholder={t('day')}
-				value={inputs.day}
-				onChange={e => {
-					if (checkDayInput(e.target.value)) {
-						setInputs(prev => ({ ...prev, day: e.target.value }))
-					}
-				}}
-			/>
-			<div className="flex justify-between w-full">
-				<button
-					type="button"
-					onClick={() => {
-						clearInputs()
-						clearErrors()
-						setVisible(false)
-					}}
-					className="button">
-					{t('cancel')}
-				</button>
-
-				{loading && <Loading forPopup={true} />}
-
-				<button type="submit" className="button">
-					{t('add')}
-				</button>
+		<Popup visible={visible} setVisible={setVisible}>
+			<div className="pr-3 flex-space-between">
+				<div className="form-title">
+					{editMode ? t('edit') : t('add')}{' '}
+					{i18n.language.slice(0, 2) === 'fr' && t('a_f')} {t('recovery')}
+				</div>
+				<Loading />
+			</div>
+			<div className="flex flex-col gap-y-5">
+				{/* Subject */}
+				<div>
+					<div className="form-label">{t('subject')}</div>
+					<div className={`outline-container outline-hover ${errors.subject && 'error'}`}>
+						<Select
+							id="periodOrSubject"
+							value={inputs.subject}
+							error={errors.subject}
+							onChange={e =>
+								setInputs(prev => ({
+									...prev,
+									subject: e.target.value
+								}))
+							}>
+							<option value="default">Select subject</option>
+							{config.subjects.map((subject, i) => (
+								<option key={i} value={subject}>
+									{t(subject)}
+								</option>
+							))}
+						</Select>
+					</div>
+				</div>
+				{/* Room number */}
+				<div>
+					<div className="form-label">
+						{t('roomNumber')} ({t('optional')})
+					</div>
+					<div className={`outline-container ${errors.roomNumber && 'error'}`}>
+						<input
+							type="text"
+							value={inputs.roomNumber}
+							onChange={e =>
+								setInputs(prev => ({ ...prev, roomNumber: e.target.value }))
+							}
+							placeholder="Ex: A-3282"
+							className="w-full outline-spacing outline-hover"
+						/>
+					</div>
+				</div>
+				{/* Days */}
+				<div>
+					<div className="form-label">{t('day')}s</div>
+					<div
+						className={`grid grid-cols-5 gap-3 outline-container outline-spacing ${
+							errors.days && 'error'
+						}`}>
+						{Array(9)
+							.fill(null)
+							.map((el, i) => (
+								<label
+									key={i}
+									htmlFor={i.toString()}
+									className={`px-5 text-center transition-[filter] border ${
+										inputs.days[i] && '!brightness-90'
+									} rounded cursor-pointer border-neutral-500 bg-popup text-dark-1 days-checkbox active:translate-y-px`}>
+									{i + 1}
+									<input
+										className="absolute appearance-none"
+										checked={inputs.days[i]}
+										onChange={() => {
+											setInputs(prev => {
+												const newDays = [...prev.days]
+												newDays[i] = !newDays[i]
+												return {
+													...prev,
+													days: newDays
+												}
+											})
+										}}
+										key={i}
+										type="checkbox"
+										id={i.toString()}
+									/>
+								</label>
+							))}
+					</div>
+				</div>
+				{/* Buttons */}
+				<div className="mt-6">
+					<div className="flex outline-container">
+						<button
+							type="button"
+							onClick={() => {
+								setInputs(defaultRecoveryInputs)
+								clearErrors()
+								setVisible(false)
+							}}
+							className="flex-1 transition-all outline-spacing outline-hover">
+							{t('cancel')}
+						</button>
+						<div className="w-px py-5 bg-neutral-400"></div>
+						<button
+							onClick={onSubmit}
+							className="flex-1 transition-all outline-spacing outline-hover">
+							{editMode ? t('save') : t('add')}
+						</button>
+					</div>
+				</div>
+				{editMode && (
+					<button
+						onClick={deleteRecovery}
+						className="text-red-500 outline-container outline-hover outline-spacing">
+						{t('delete')}
+					</button>
+				)}
 			</div>
 		</Popup>
 	)

@@ -1,15 +1,18 @@
-import spinner from '../assets/images/spinner.svg'
+import { useRecoilValue } from 'recoil'
+import { loadingAtom } from '../atoms'
 
-interface Params {
+interface Props {
 	forPopup?: boolean
+	className?: string
 }
 
-export default function Loading({ forPopup = false }: Params) {
+export default function Loading({ className }: Props) {
+	const loading = useRecoilValue(loadingAtom)
+
 	return (
-		<img
-			src={spinner}
-			alt="Loading..."
-			className={`${forPopup ? 'w-10' : 'w-20 mt-10'} mx-auto`}
-		/>
+		<div
+			className={`w-5 border-2 border-dark-1 border-b-transparent rounded-full animate-spin loader aspect-square ${className} ${
+				!loading && 'opacity-0'
+			}`}></div>
 	)
 }

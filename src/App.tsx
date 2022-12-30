@@ -1,10 +1,10 @@
 import { useLayoutEffect } from 'react'
-import { useSetRecoilState } from 'recoil'
 import Div100vh from 'react-div-100vh'
 import { Route, Routes } from 'react-router-dom'
-import Main from './Main'
+import { useSetRecoilState } from 'recoil'
 import { viewportAtom } from './atoms'
-import { Cafeteria, Home, Homeworks, Recoveries, Schedule, Settings, Setup } from './pages'
+import Main from './Main'
+import { Cafeteria, Home, Homeworks, Recoveries, Schedule, Setup } from './pages'
 import './translations'
 
 export default function App() {
@@ -38,8 +38,6 @@ export default function App() {
 					<Route path="homeworks" element={<Homeworks />} />
 					<Route path="recoveries" element={<Recoveries />} />
 				</Route>
-
-				<Route path="/settings" element={<Settings />} />
 			</Routes>
 		</Div100vh>
 	)

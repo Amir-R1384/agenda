@@ -1,9 +1,7 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { ReactNode, useEffect, useState } from 'react'
+import { ChevronDownOutline } from '@graywolfai/react-heroicons'
+import React, { ReactNode } from 'react'
 
-interface Params {
+interface Props {
 	index: number
 	open: boolean
 	setAccordions: React.Dispatch<React.SetStateAction<boolean[]>>
@@ -11,7 +9,7 @@ interface Params {
 	children?: ReactNode
 }
 
-export default function Accordion({ index, open, setAccordions, title, children }: Params) {
+export default function Accordion({ index, open, setAccordions, title, children }: Props) {
 	function toggleAccordion() {
 		setAccordions(prev => {
 			const newAccordions = [...prev]
@@ -21,15 +19,19 @@ export default function Accordion({ index, open, setAccordions, title, children 
 	}
 
 	return (
-		<div className="flex flex-col w-full px-4 py-2 transition-all bg-white border rounded-lg shadow-md border-neutral-700">
+		<div
+			className={`flex flex-col transition-all outline-container outline-spacing ${
+				!open && 'outline-hover'
+			} `}>
 			<button
 				type="button"
 				onClick={toggleAccordion}
-				className="flex items-center justify-between w-full">
-				<div className="text-lg font-semibold text-neutral-700">{title}</div>
-				<FontAwesomeIcon
-					icon={faAngleDown as IconProp}
-					className={`${!open && '-rotate-90'} transition-transform duration-500`}
+				className={`rounded flex-space-between`}>
+				<div className="text-lg font-medium text-dark-1">{title}</div>
+				<ChevronDownOutline
+					className={`${
+						!open && '-rotate-90'
+					} icon !w-6 transition-transform duration-500`}
 				/>
 			</button>
 			<div

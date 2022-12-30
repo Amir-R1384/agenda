@@ -8,13 +8,14 @@ export type Homework = {
 	timestamp: number
 	period: number
 	subject: string
-	body: string
+	name: string
+	description: string
 }
 export type Recovery = {
 	id: number
 	roomNumber: string
 	subject: string
-	day: number
+	days: number[]
 }
 
 export interface Meal {
@@ -38,15 +39,16 @@ export interface Config {
 }
 
 export interface HomeworkInputs {
-	date: string
 	periodOrSubject: string
-	body: string
+	date: string
+	name: string
+	description: string
 }
 
 export interface RecoveryInputs {
 	subject: string
 	roomNumber: string
-	day: string
+	days: boolean[]
 }
 
 export interface Popup {

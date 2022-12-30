@@ -29,18 +29,16 @@ export default function DayInfo() {
 	}, [])
 
 	return (
-		<div className="flex items-center justify-between w-full text-xs font-medium uppercase sm:font-normal sm:text-sm sm:w-auto sm:gap-x-5 text-neutral-400">
-			<div>
-				{t(config.daysInWeek[dateInfo.day])}, {dateInfo.date}{' '}
-				{t(config.months[dateInfo.month])} {dateInfo.year}
-			</div>
-			<div>
+		<div className="uppercase">
+			{t(config.daysInWeek[dateInfo.day])}, {t(config.months[dateInfo.month])} {dateInfo.date}{' '}
+			-{' '}
+			<span className="font-medium">
 				{schoolDay === undefined
 					? t('notInList')
 					: typeof schoolDay === 'number'
 					? `${t('day')} ${schoolDay}`
 					: t(schoolDay)}
-			</div>
+			</span>
 		</div>
 	)
 }

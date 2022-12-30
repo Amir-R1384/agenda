@@ -1,14 +1,14 @@
 import { useTranslation } from 'react-i18next'
-import { getPeriod } from '../../util'
 import config from '../../config'
+import { getPeriod } from '../../util'
 
-interface Params {
+interface Props {
 	index: number
 	subject: string
 	roomNumber: string
 }
 
-export default function Period({ index, subject, roomNumber }: Params) {
+export default function Period({ index, subject, roomNumber }: Props) {
 	const { t } = useTranslation()
 
 	const { type, number } = getPeriod(index)

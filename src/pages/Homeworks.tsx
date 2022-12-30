@@ -1,33 +1,33 @@
 import { useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
 import { useTranslation } from 'react-i18next'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { homeworksAtom, loadingAtom, scheduleAtom } from '../atoms'
-import { Heading, Homework, AddHomeworkPopup, AddButton, Loading } from '../components'
-import { getToday, getSchoolDay } from '../util'
-import { HomeworkInputs } from '../types'
+import { AddHomeworkPopup, CardContainer, Homework, HomeworkPopup, Loading } from '../components'
+import { defaultHomeworkInputs, emptyHomework } from '../config/defaults'
 import { saveData } from '../lib'
+import { Homework as HomeworkType, HomeworkInputs } from '../types'
+import { convertToYMD, getSchoolDay } from '../util'
 
 export default function Homeworks() {
 	const { t } = useTranslation()
-	const today = getToday()
-
-	const defaultInputs = {
-		date: today,
-		periodOrSubject: 'default',
-		body: ''
-	}
 
 	const [loading, setLoading] = useRecoilState(loadingAtom)
 	const [homeworks, setHomeworks] = useRecoilState(homeworksAtom)
-	const [popup, setPopup] = useState(false)
-	const [inputs, setInputs] = useState<HomeworkInputs>(defaultInputs)
+
+	const [inputs, setInputs] = useState<HomeworkInputs>(defaultHomeworkInputs)
 	const schedule = useRecoilValue(scheduleAtom)
+
+	const [cardPopup, setCardPopup] = useState(false)
+	const [currentHomework, setCurrentHomework] = useState<HomeworkType>(emptyHomework)
+
+	const [addHomeworkPopup, setAddHomeworkPopup] = useState(false)
+	const [editMode, setEditMode] = useState(false)
 
 	function addHomework() {
 		return new Promise<void>(async (resolve, reject) => {
 			setLoading(true)
 
-			const { date: fullDate, periodOrSubject, body } = inputs
+			const { date: fullDate, periodOrSubject, name, description } = inputs
 			const dateObj = new Date(fullDate.replaceAll('-', '/'))
 
 			const schoolDay = getSchoolDay(dateObj)
@@ -52,19 +52,37 @@ export default function Homeworks() {
 				return
 			}
 
-			const newHomeworks = [
-				...homeworks,
-				{
+			const newHomeworks = [...homeworks]
+
+			if (editMode) {
+				const targetHomework = newHomeworks.find(({ id }) => id === currentHomework.id)!
+
+				newHomeworks.splice(newHomeworks.indexOf(targetHomework), 1)
+
+				const newHomework = {
+					id: currentHomework.id,
+					timestamp: dateObj.valueOf(),
+					period,
+					subject,
+					name,
+					description
+				}
+
+				newHomeworks.push(newHomework)
+			} else {
+				newHomeworks.push({
 					id: Date.now(),
 					timestamp: dateObj.valueOf(),
 					period,
 					subject,
-					body
-				}
-			]
+					name,
+					description
+				})
+			}
 
 			await saveData('homeworks', newHomeworks)
 			setHomeworks(newHomeworks)
+			setEditMode(false)
 
 			setLoading(false)
 			resolve()
@@ -73,35 +91,68 @@ export default function Homeworks() {
 
 	return (
 		<>
-			<Heading title="homeworks" />
-			{loading && !popup ? (
-				<Loading />
-			) : homeworks.length ? (
-				<div className="custom-grid">
-					{[...homeworks]
-						.sort((a, b) => {
-							if (a.timestamp !== b.timestamp) {
-								return a.timestamp - b.timestamp
-							} else {
-								return a.period - b.period
-							}
-						})
-						.map((homework, i) => (
-							<Homework key={i} {...homework} />
-						))}
-				</div>
-			) : (
-				<div className="no-data">{t('noHomework2')}</div>
-			)}
-			{(!loading || popup) && <AddButton onClick={() => setPopup(true)} />}
+			<CardContainer
+				heading="homeworks"
+				includeAddButton
+				callBack={() => {
+					setInputs(defaultHomeworkInputs)
+					setAddHomeworkPopup(true)
+				}}>
+				{loading && !addHomeworkPopup ? (
+					<Loading />
+				) : homeworks.length ? (
+					<div className="custom-grid">
+						{[...homeworks]
+							.sort((a, b) => {
+								if (a.timestamp !== b.timestamp) {
+									return a.timestamp - b.timestamp
+								} else {
+									return a.period - b.period
+								}
+							})
+							.map((homework, i) => (
+								<Homework
+									key={i}
+									{...homework}
+									onClick={() => {
+										setCurrentHomework(homework)
+										setCardPopup(true)
+									}}
+								/>
+							))}
+					</div>
+				) : (
+					<div className="no-data">{t('noHomework2')}</div>
+				)}
+			</CardContainer>
 
 			<AddHomeworkPopup
-				visible={popup}
-				setVisible={setPopup}
+				visible={addHomeworkPopup}
+				setVisible={setAddHomeworkPopup}
 				inputs={inputs}
 				setInputs={setInputs}
 				addHomework={addHomework}
-				defaultInputs={defaultInputs}
+				defaultInputs={defaultHomeworkInputs}
+				editMode={editMode}
+			/>
+
+			<HomeworkPopup
+				visible={cardPopup}
+				setVisible={setCardPopup}
+				homeworkInfo={currentHomework}
+				onEdit={() => {
+					setCardPopup(false)
+					setTimeout(() => {
+						setEditMode(true)
+						setAddHomeworkPopup(true)
+						setInputs({
+							name: currentHomework.name,
+							description: currentHomework.description,
+							date: convertToYMD(currentHomework.timestamp),
+							periodOrSubject: currentHomework.period.toString()
+						})
+					}, 400)
+				}}
 			/>
 		</>
 	)

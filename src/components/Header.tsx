@@ -1,27 +1,32 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
-import { faGear } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link } from 'react-router-dom'
+import { Bars3Outline } from '@graywolfai/react-heroicons'
+import { useEffect, useRef, useState } from 'react'
 import DayInfo from './DayInfo'
-import title from '../assets/images/title.png'
-import { useRecoilValue } from 'recoil'
-import { viewportAtom } from '../atoms'
+import Settings from './Settings'
 
 export default function Header() {
-	const viewport = useRecoilValue(viewportAtom)
+	const headerRef = useRef<HTMLElement | null>(null)
+	const [settingsOpen, setSettingsOpen] = useState(false)
+	const [settingsHeight, setSettingsHeight] = useState(0)
+
+	useEffect(() => {
+		const windowHeight = window.innerHeight
+		const headerHeight = headerRef.current?.getBoundingClientRect().height!
+		setSettingsHeight(windowHeight - headerHeight)
+	}, [])
 
 	return (
-		<header className="flex flex-col w-full px-3 pt-1 pb-3 bg-white border-b sm:py-2 sm:justify-between sm:flex-row border-neutral-400 gap-y-3 shrink-0">
-			<nav className="flex items-center justify-between w-full">
-				<Link to="/app/">
-					<img src={title} className="h-8 translate-y-1" />
-				</Link>
-				{viewport === 'desktop' && <DayInfo />}
-				<Link to="/settings" className="icon noSelect">
-					<FontAwesomeIcon icon={faGear as IconProp} className="w-full h-full" />
-				</Link>
-			</nav>
-			{viewport === 'mobile' && <DayInfo />}
+		<header
+			ref={headerRef}
+			className="relative py-2 bg-white border-b px-main flex-space-between border-neutral-200">
+			<DayInfo />
+			<button onClick={() => setSettingsOpen(prev => !prev)}>
+				<Bars3Outline className="icon" />
+			</button>
+
+			<Settings
+				style={{ height: settingsOpen ? `${settingsHeight}px` : '0px' }}
+				className={`${!settingsOpen && ''}`}
+			/>
 		</header>
 	)
 }

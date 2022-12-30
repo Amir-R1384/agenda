@@ -1,5 +1,5 @@
 import { atom } from 'recoil'
-import { Homework, Recovery, SchoolDay, Schedule, News } from './types'
+import { Homework, News, Recovery, Schedule, SchoolDay } from './types'
 
 export const schoolDayAtom = atom<SchoolDay>({
 	key: 'schoolDayAtom',

@@ -1,8 +1,9 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
 import { onAuthStateChanged } from 'firebase/auth'
-import { getDoc, doc } from 'firebase/firestore'
+import { doc, getDoc } from 'firebase/firestore'
+import { useEffect } from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { auth, usersCollection } from './api/firebase'
 import {
 	homeworksAtom,
 	loadingAtom,
@@ -12,9 +13,8 @@ import {
 	viewportAtom
 } from './atoms'
 import { Footer, Header } from './components'
-import { getSchoolDay } from './util'
-import { usersCollection, auth } from './api/firebase'
 import { saveToLS } from './lib'
+import { getSchoolDay } from './util'
 
 export default function Main() {
 	const location = useLocation()
@@ -64,9 +64,9 @@ export default function Main() {
 	return (
 		<div className="flex flex-col w-full h-full flex-nowrap">
 			<Header />
-			<main className="w-full px-3 overflow-auto grow sm:flex sm:pl-0 sm:pr-5 sm:flex-1 gap-x-5">
+			<main className="flex w-full overflow-auto grow">
 				{viewport === 'desktop' && <Footer />}
-				<div className="flex flex-col items-center flex-1 min-h-full py-3 overflow-x-hidden overflow-y-auto gap-y-5">
+				<div className="flex flex-col items-center flex-1 min-h-full py-5 overflow-x-hidden overflow-y-auto px-main">
 					<Outlet />
 				</div>
 			</main>
