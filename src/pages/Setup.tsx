@@ -33,7 +33,7 @@ export default function Setup() {
 			} else {
 				navigate('/app/')
 			}
-			// setLoading(false)
+			setLoading(false)
 			unsubscribe()
 		})
 	}, [])
