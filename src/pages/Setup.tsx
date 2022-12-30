@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { auth, signIn as FB_signIn, usersCollection } from '../api/firebase'
-import design from '../assets/images/design.svg'
+import featuresDesign from '../assets/images/featuresDesign.svg'
 import { loadingAtom, viewportAtom } from '../atoms'
 import { InstallGuide, Loading } from '../components'
 import { getBrowser } from '../util'
@@ -114,7 +114,7 @@ export default function Setup() {
 							)}
 						</div>
 					</div>
-					<img className="hidden mr-20 md:block" src={design} alt="Design" />
+					<img className="hidden mr-20 md:block" src={featuresDesign} alt="Design" />
 				</div>
 			</main>
 
