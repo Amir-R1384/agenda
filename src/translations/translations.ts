@@ -33,7 +33,7 @@ export default {
 			fishOrSeafood: 'Based on fish or seafood',
 			// No data
 			noHomework1: 'No homeworks for now',
-			noHomework2: 'Click the button below to add a homework',
+			noHomework2: 'Click the plus icon to add a homework',
 			noRecovery: 'No recovery courses',
 			noSchedule: "You haven't created a schedule yet",
 			noSchool: 'No school',
@@ -187,7 +187,7 @@ export default {
 			fishOrSeafood: 'À base de poisson ou fruits de mer',
 			// No data
 			noHomework1: "Pas de devoirs pour l'instant",
-			noHomework2: 'Clickez sur le bouton ci-dessous pour ajouter un devoir',
+			noHomework2: 'Clickez sur le bouton de plus pour ajouter un devoir',
 			noRecovery: 'Pas de cours de récupération',
 			noSchedule: "Vous n'avez pas encore créé un horaire",
 			noSchool: "Pas d'école",
