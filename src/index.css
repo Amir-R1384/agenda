@@ -13,7 +13,7 @@
 }
 
 body {
-	@apply bg-neutral-100 overflow-hidden;
+	@apply bg-neutral-100;
 	user-select: none;
 	-webkit-user-select: none;
 	-webkit-tap-highlight-color: transparent;
@@ -26,7 +26,7 @@ footer {
 
 @layer components {
 	.button {
-		@apply cursor-pointer px-5 py-2 text-center;
+		@apply cursor-pointer px-5 py-2 text-center md:text-lg;
 	}
 
 	.button-filled {
@@ -130,6 +130,14 @@ footer {
 
 	.error {
 		@apply border-red-600;
+	}
+
+	.text-para {
+		@apply md:text-lg;
+	}
+
+	.text-heading {
+		@apply text-3xl md:text-4xl;
 	}
 }
 

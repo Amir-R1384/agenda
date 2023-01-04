@@ -1,4 +1,4 @@
-import type { Dispatch, ReactNode, SetStateAction } from 'react'
+import { Dispatch, ReactNode, SetStateAction, useState } from 'react'
 import { useEffect, useRef } from 'react'
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
 
 export default function Popout({ visible, setVisible, children, fullScreen = false }: Props) {
 	const popupRef = useRef<HTMLDivElement | null>(null)
+	const [removeBg, setRemoveBg] = useState(false)
 
 	useEffect(() => {
 		if (visible === false) {
@@ -30,33 +31,28 @@ export default function Popout({ visible, setVisible, children, fullScreen = fal
 	}, [visible])
 
 	useEffect(() => {
-		setTimeout(() => {
-			if (visible) {
-				document
-					.querySelector('meta[name="theme-color"]')
-					?.setAttribute('content', '#7F7F7F')
-			} else {
-				document.querySelector('meta[name="theme-color"]')?.setAttribute('content', 'white')
-			}
-		}, 0)
+		if (visible) {
+			setRemoveBg(false)
+
+			document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#7F7F7F')
+		} else {
+			document.querySelector('meta[name="theme-color"]')?.setAttribute('content', 'white')
+			setTimeout(() => setRemoveBg(true), 500)
+		}
 	}, [visible])
 
 	return (
 		<>
-			<div className={`absolute top-0 bottom-0 left-0 right-0 ${!visible && 'hidden'}`}></div>
+			<div
+				className={`fixed bg-black transition-opacity duration-700 bottom-0 top-0  left-0 right-0  ${
+					visible ? 'opacity-50' : 'opacity-0'
+				} ${removeBg && 'invisible'}`}></div>
 			<div
 				ref={popupRef}
-				style={{
-					transition: 'box-shadow 200ms ease-out, height 600ms'
-				}}
-				className={`fixed max-w-screen-sm mx-auto bottom-0 overflow-scroll left-0 right-0 bg-popup rounded-t-3xl ${
-					visible
-						? `${
-								fullScreen ? 'h-[95%]' : 'h-4/5'
-						  } shadow-[0_0_0_1000px_rgba(0,0,0,0.5)]`
-						: 'h-0 shadow-[0_0_0_1000px_rgba(0,0,0,0)]'
-				}`}>
-				<div>{children}</div>
+				className={`fixed max-w-screen-sm transition-transform duration-500 mx-auto bottom-0 overflow-scroll left-0 right-0 bg-popup rounded-t-3xl ${
+					visible ? `translate-y-0 ` : 'translate-y-[100vh]'
+				} ${fullScreen ? 'h-[95%]' : 'h-[80%]'}`}>
+				{children}
 			</div>
 		</>
 	)
