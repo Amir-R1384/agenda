@@ -9,7 +9,7 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { auth, signIn as FB_signIn, usersCollection } from '../api/firebase'
 import { loadingAtom } from '../atoms'
-import { InstallGuide, InstallNotice, Loading } from '../components'
+import { InstallGuide, InstallNotice, Loading, UpdateNotice } from '../components'
 import title from '../assets/images/title.png'
 
 export default function Setup() {
@@ -83,6 +83,8 @@ export default function Setup() {
 				{installGuidePopup && <InstallGuide setPopup={setInstallGuidePopup} />}
 
 				<img src={title} alt="Egenda" className="w-1/2" />
+
+				<UpdateNotice className="-mt-20" />
 
 				<div className="flex flex-col items-center w-full px-5 -mt-10 gap-y-2">
 					{loading ? (

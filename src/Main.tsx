@@ -11,7 +11,7 @@ import {
 	schoolDayAtom,
 	viewportAtom
 } from './atoms'
-import { Footer, Header } from './components'
+import { Footer, Header, UpdateNotice } from './components'
 import { getSchoolDay } from './util'
 import { usersCollection, auth } from './api/firebase'
 import { saveToLS } from './lib'
@@ -64,10 +64,13 @@ export default function Main() {
 	return (
 		<div className="flex flex-col w-full h-full flex-nowrap">
 			<Header />
-			<main className="w-full px-3 overflow-auto grow sm:flex sm:pl-0 sm:pr-5 sm:flex-1 gap-x-5">
+			<main className="w-full overflow-auto grow sm:flex sm:flex-1 ">
 				{viewport === 'desktop' && <Footer />}
-				<div className="flex flex-col items-center flex-1 min-h-full py-3 overflow-x-hidden overflow-y-auto gap-y-5">
-					<Outlet />
+				<div className="items-center flex-1 min-h-full overflow-x-hidden overflow-y-auto gap-y-5">
+					<UpdateNotice />
+					<div className="flex flex-col items-center px-3 py-3 gap-y-5 sm:px-5">
+						<Outlet />
+					</div>
 				</div>
 			</main>
 			{viewport === 'mobile' && <Footer />}

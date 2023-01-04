@@ -61,6 +61,9 @@ export default {
 			addToHome: "Click on 'Add to home screen'",
 			clickOn3Dots: 'Click on the 3 dots at the top right of your screen',
 			clickAddAndDone: "Click on 'Add' and the app should be installed on your home screen",
+			updateNotice:
+				'The official Egenda website has been released. Therefore this site will no longer be updated. To access the official site, visit ',
+			inYourBrowser: ' in your browser.',
 			// Other
 			day: 'Day',
 			today: 'Today',
@@ -204,6 +207,9 @@ export default {
 			clickOn3Dots: 'Cliquez sur les 3 points en haut à droite',
 			clickAddAndDone:
 				"Cliquez sur 'Ajouter' et l'application devrait être ajoutée à votre écran d'accueil",
+			updateNotice:
+				"Le site officiel d'Egenda est sorti. Ce site ne sera donc plus mis à jour. Pour accéder au site officiel, visitez ",
+			inYourBrowser: ' dans votre navigateur.',
 			// Other
 			day: 'Jour',
 			today: "Aujourd'hui",
