@@ -37,6 +37,10 @@ export default function Main() {
 		window.scrollTo(0, 0)
 	}, [location])
 
+	useEffect(() => {
+		document.body.style.overflow = 'hidden'
+	}, [])
+
 	// * Syncing the data with the server in case of changes on other devices
 	useEffect(() => {
 		// @ts-ignore
@@ -62,7 +66,7 @@ export default function Main() {
 	}, [])
 
 	return (
-		<div className="flex flex-col w-full h-full flex-nowrap">
+		<div className="flex flex-col w-full h-full overflow-hidden ">
 			<Header />
 			<main className="flex w-full overflow-auto grow">
 				{viewport === 'desktop' && <Footer />}
