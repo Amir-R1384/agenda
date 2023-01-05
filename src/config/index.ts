@@ -26,7 +26,10 @@ const config: Config = {
 		'physics',
 		'mondeEducF',
 		'psychology',
-		'entrepreneurship'
+		'entrepreneurship',
+		'music',
+		'choir',
+		'musicTheory'
 	],
 	classes: [401],
 

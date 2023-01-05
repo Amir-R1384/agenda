@@ -15,6 +15,9 @@ export default {
 		mondeEducF: 'World - Financial Education',
 		psychology: 'Psychology',
 		entrepreneurship: 'Entrepreneurship',
+		music: 'Music',
+		choir: 'Choir',
+		musicTheory: 'Music theory',
 		// Day related
 		day: 'Day',
 		today: 'Today',

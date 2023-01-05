@@ -15,6 +15,9 @@ export default {
 		mondeEducF: 'Monde - Éducation financière',
 		psychology: 'Psychologie',
 		entrepreneurship: 'Entrepreneuriat',
+		music: 'Musique',
+		choir: 'Chorale',
+		musicTheory: 'Théorie de musique',
 		// Day related
 		day: 'Jour',
 		today: "Aujourd'hui",
