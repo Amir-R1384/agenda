@@ -76,6 +76,7 @@ export default function AddHomeworkPopup({
 	}
 
 	function selectNextCourse() {
+		setErrors(prev => ({ ...prev, periodOrSubject: false }))
 		// Making sure the periodOrSubject is actually a subject and the subject exists in the schedule
 		if (
 			!isNaN(Number(inputs.periodOrSubject)) ||
