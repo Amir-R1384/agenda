@@ -23,8 +23,8 @@ export default function News({ title, content, image, date }: Props) {
 					<button
 						onClick={() => setPopup(true)}
 						className="flex items-center self-start w-auto transition-all duration-300 border-b gap-x-1 hover:gap-x-3 border-neutral-400 text-neutral-600">
-						<div className="text-sm font-semibold">{t('moreInfo')}</div>
-						<ArrowLongRightOutline className="w-6 mt-px" />
+						<div className="text-sm font-semibold text-primary">{t('moreInfo')}</div>
+						<ArrowLongRightOutline className="w-6 mt-px text-primary" />
 					</button>
 				</div>
 			</div>
@@ -36,15 +36,15 @@ export default function News({ title, content, image, date }: Props) {
 					}}
 					className="w-full bg-center bg-cover shadow rounded-t-3xl aspect-video "></div>
 				<div className="p-5 space-y-3">
-					<div className="text-2xl">{title}</div>
-					<div className="!mt-1 !mb-5 text-xs font-medium uppercase  text-neutral-500">
+					<div className="text-2xl text-primary">{title}</div>
+					<div className="!mt-1 !mb-5 text-xs font-medium uppercase text-neutral-500 dark:text-neutral-400">
 						{new Date(date).toLocaleString()}
 					</div>
-					<div>{content}</div>
+					<div className="text-secondary">{content}</div>
 				</div>
 				<button
 					onClick={() => setPopup(false)}
-					className="outline-container outline-spacing outline-hover">
+					className="outline-container outline-spacing text-primary outline-hover">
 					{t('close')}
 				</button>
 			</Popup>

@@ -1,5 +1,6 @@
 export { default as convertToYMD } from './convertToYMD'
 export { default as generateEmptySchedule } from './generateEmptySchedule'
+export { default as getAppearance } from './getAppearance'
 export { default as getBrowser } from './getBrowser'
 export { default as getDaysDiff } from './getDaysDiff'
 export { default as getPeriod } from './getPeriod'

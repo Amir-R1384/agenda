@@ -58,6 +58,7 @@ export default {
 		nextClass: 'Next class',
 		continueInBrowser: 'Continue in browser',
 		installMobileApp: 'Install mobile app',
+		toggleDarkMode: 'Toggle dark mode',
 		// Auth
 		signInWithGoogle: 'Sign in with Google',
 		signOut: 'Sign out',

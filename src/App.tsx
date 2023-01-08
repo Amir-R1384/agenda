@@ -6,9 +6,18 @@ import { viewportAtom } from './atoms'
 import Main from './Main'
 import { Cafeteria, Home, Homeworks, Recoveries, Schedule, Setup } from './pages'
 import './translations'
+import { getAppearance } from './util'
 
 export default function App() {
 	const setViewport = useSetRecoilState(viewportAtom)
+
+	useLayoutEffect(() => {
+		const appearance = getAppearance()
+		if (appearance === 'dark') {
+			document.documentElement.classList.add('dark')
+			document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#262626')
+		}
+	}, [])
 
 	useLayoutEffect(() => {
 		function listener() {

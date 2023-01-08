@@ -22,7 +22,7 @@ export default function Footer() {
 
 	return (
 		<footer
-			className={`pt-2 bg-white border-t px-main justify-between border-neutral-200 ${
+			className={`pt-2 bg-white dark:bg-neutral-800 dark:border-neutral-700 border-t px-5 justify-between border-neutral-200 ${
 				viewport === 'desktop'
 					? 'flex flex-col h-full justify-between border-t-0 border-r !py-10'
 					: 'flex-space-between'

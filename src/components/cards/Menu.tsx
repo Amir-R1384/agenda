@@ -1,9 +1,7 @@
 import { useTranslation } from 'react-i18next'
-import carrot from '../../assets/images/carrot.svg'
-import fish from '../../assets/images/fish.svg'
-import PVT from '../../assets/images/PVT.svg'
 import config from '../../config'
 import { Meal } from '../../types'
+import { CarrotSvg, FishSvg, PVTSvg } from '../svgs'
 
 interface Props {
 	index: number
@@ -21,11 +19,11 @@ export default function Menu({ index, meals }: Props) {
 					<div key={i} className="flex items-center gap-x-2">
 						<div className="card-main">{t(body)}</div>
 						{type === 'vegan' ? (
-							<img src={carrot} className="w-8 translate-y-px" />
+							<CarrotSvg className="w-8" />
 						) : type === 'fish' ? (
-							<img src={fish} className="w-8 translate-y-px" />
+							<FishSvg className="w-8" />
 						) : type === 'PVT' ? (
-							<img src={PVT} className="w-8 translate-y-px" />
+							<PVTSvg className="w-8" />
 						) : (
 							''
 						)}

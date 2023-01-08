@@ -1,3 +1,6 @@
 export { default as CardsDesignEn } from './CardsDesignEn'
 export { default as CardsDesignFr } from './CardsDesignFr'
+export { default as CarrotSvg } from './CarrotSvg'
 export { default as FeaturesDesign } from './FeaturesDesign'
+export { default as FishSvg } from './FishSvg'
+export { default as PVTSvg } from './PVTSvg'

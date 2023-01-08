@@ -1,8 +1,6 @@
 import { useTranslation } from 'react-i18next'
-import carrot from '../assets/images/carrot.svg'
-import fish from '../assets/images/fish.svg'
-import PVT from '../assets/images/PVT.svg'
 import { CardContainer, Menu } from '../components'
+import { CarrotSvg, FishSvg, PVTSvg } from '../components/svgs'
 import config from '../config'
 import { getDaysDiff } from '../util'
 
@@ -22,21 +20,21 @@ export default function Cafeteria() {
 					<Menu key={i} index={i} meals={meals[i]} />
 				))}
 				{/* Reference */}
-				<div className="p-3 mt-3 space-y-3 rounded-lg bg-neutral-200">
+				<div className="p-3 mt-3 space-y-3 rounded-lg bg-neutral-200 dark:bg-neutral-800">
 					<div className="flex-space-between gap-x-2">
-						<img src={carrot} className="w-8" />
-						<div className="text-xs text-right text-neutral-500">{t('vege')}</div>
+						<CarrotSvg className="w-8 h-7" />
+						<div className="text-xs text-right text-secondary">{t('vege')}</div>
 					</div>
 					<div className="flex-space-between gap-x-2">
-						<img src={fish} className="w-8" />
-						<div className="text-xs text-right text-neutral-500">
+						<FishSvg className="w-8 h-7" />
+						<div className="text-xs text-right text-secondary">
 							{t('fishOrSeafood')}
 						</div>
 					</div>
 
 					<div className="flex-space-between gap-x-2">
-						<img src={PVT} className="w-8" />
-						<div className="text-xs text-right text-neutral-500">{t('PVT')}</div>
+						<PVTSvg className="w-8 h-7" />
+						<div className="text-xs text-right text-secondary">{t('PVT')}</div>
 					</div>
 				</div>
 			</div>

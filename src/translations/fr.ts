@@ -60,6 +60,7 @@ export default {
 		nextClass: 'Cours prochain',
 		continueInBrowser: 'Continuer dans le navigateur',
 		installMobileApp: "Installer l'appli mobile",
+		toggleDarkMode: 'Basculer en mode sombre',
 		// Auth
 		signInWithGoogle: "S'identifier avec Google",
 		signOut: 'Se déconnecter',

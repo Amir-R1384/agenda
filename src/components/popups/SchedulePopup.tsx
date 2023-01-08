@@ -116,7 +116,7 @@ export default function SchedulePopup({ visible, setVisible }: Props) {
 													errors[i][j]?.roomNumber) &&
 												'!border-red-500'
 											} outline-container border-neutral-500`}>
-											<div className="py-1 pl-5 text-lg text-dark-1">
+											<div className="py-1 pl-5 text-lg text-primary">
 												{t(getPeriod(j).type)} {getPeriod(j).number}
 											</div>
 											<div className="flex outline-container !border-b-0">
@@ -136,7 +136,7 @@ export default function SchedulePopup({ visible, setVisible }: Props) {
 														</option>
 													))}
 												</Select>
-												<div className="w-px py-5 bg-neutral-400"></div>
+												<div className="w-px py-5 bg-outline"></div>
 
 												{/* Room number input */}
 												<input
@@ -162,13 +162,13 @@ export default function SchedulePopup({ visible, setVisible }: Props) {
 				<button
 					type="button"
 					onClick={() => setVisible(false)}
-					className="flex-1 transition-all outline-spacing outline-hover">
+					className="flex-1 transition-all text-primary outline-spacing outline-hover">
 					{t('cancel')}
 				</button>
-				<div className="w-px py-5 bg-neutral-400"></div>
+				<div className="w-px py-5 bg-outline"></div>
 				<button
 					onClick={onSubmit}
-					className="flex-1 transition-all outline-spacing outline-hover">
+					className="flex-1 transition-all text-primary outline-spacing outline-hover">
 					{t('save')}
 				</button>
 			</div>

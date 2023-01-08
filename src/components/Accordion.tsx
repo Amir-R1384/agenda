@@ -27,7 +27,7 @@ export default function Accordion({ index, open, setAccordions, title, children 
 				type="button"
 				onClick={toggleAccordion}
 				className={`rounded flex-space-between`}>
-				<div className="text-lg font-medium text-dark-1">{title}</div>
+				<div className="text-lg font-medium text-primary">{title}</div>
 				<ChevronDownOutline
 					className={`${
 						!open && '-rotate-90'

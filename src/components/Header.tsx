@@ -17,7 +17,7 @@ export default function Header() {
 	return (
 		<header
 			ref={headerRef}
-			className="relative py-2 bg-white border-b px-main flex-space-between border-neutral-200">
+			className="relative py-2 transition-all duration-700 bg-white border-b dark:border-neutral-700 dark:bg-neutral-800 px-main flex-space-between border-neutral-200">
 			<DayInfo />
 			<button onClick={() => setSettingsOpen(prev => !prev)}>
 				<Bars3Outline className="icon" />

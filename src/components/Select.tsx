@@ -22,7 +22,7 @@ export default function Select({ id, value, onChange, children, error, className
 				onChange={onChange}>
 				{children}
 			</select>
-			<ChevronUpDownOutline className="absolute z-0 w-7 right-main" />
+			<ChevronUpDownOutline className="absolute z-0 w-7 right-main text-primary" />
 		</label>
 	)
 }

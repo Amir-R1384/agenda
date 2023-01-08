@@ -45,7 +45,7 @@ export default function HomeworkPopup({ visible, setVisible, homeworkInfo, onEdi
 	return (
 		<Popup visible={visible} setVisible={setVisible}>
 			<div className="pr-5 flex-space-between">
-				<div className="p-5 mb-5 text-xl text-dark-1">{name}</div>
+				<div className="p-5 mb-5 text-xl text-primary">{name}</div>
 				<Loading />
 			</div>
 
@@ -64,7 +64,7 @@ export default function HomeworkPopup({ visible, setVisible, homeworkInfo, onEdi
 
 			{/* Description */}
 			{description && (
-				<div className="outline-container !border-t-0 outline-spacing text-dark-2 !py-4">
+				<div className="outline-container !border-t-0 outline-spacing text-secondary !py-4">
 					{description}
 				</div>
 			)}
@@ -77,10 +77,10 @@ export default function HomeworkPopup({ visible, setVisible, homeworkInfo, onEdi
 					className="flex-1 text-red-500 transition-all outline-spacing outline-hover">
 					{t('delete')}
 				</button>
-				<div className="w-px py-5 bg-neutral-400"></div>
+				<div className="w-px py-5 bg-outline"></div>
 				<button
 					onClick={onEdit}
-					className="flex-1 transition-all outline-spacing outline-hover">
+					className="flex-1 transition-all outline-spacing text-primary outline-hover">
 					{t('edit')}
 				</button>
 			</div>

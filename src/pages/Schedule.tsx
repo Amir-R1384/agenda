@@ -1,5 +1,5 @@
 import { ChevronLeftOutline, ChevronRightOutline } from '@graywolfai/react-heroicons'
-import { useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRecoilValue } from 'recoil'
 import { loadingAtom, scheduleAtom } from '../atoms'
@@ -19,7 +19,7 @@ export default function Schedule() {
 	const currentSchoolDay = getSchoolDay(currentDate)
 	const [periods, setPeriods] = useState<PeriodState>([])
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		setPeriods(
 			typeof currentSchoolDay === 'number' &&
 				schedule[currentSchoolDay - 1]?.some(el => el !== null)
@@ -41,11 +41,11 @@ export default function Schedule() {
 	return (
 		<>
 			<CardContainer heading="schedule">
-				<div className="max-w-screen-md mx-auto mb-5 overflow-visible border rounded-lg bg-neutral-50 flex-space-between border-neutral-300">
+				<div className="max-w-screen-md mx-auto mb-5 overflow-visible border rounded-lg bg-neutral-50 dark:bg-neutral-700 flex-space-between border-neutral-300 dark:border-neutral-600">
 					<button onClick={() => changeDate('previous')}>
 						<ChevronLeftOutline className="icon" />
 					</button>
-					<div className="text-dark-1">
+					<div className="text-primary">
 						{currentDate.toDateString() === new Date().toDateString()
 							? t('today')
 							: currentDate.getDate() +
@@ -74,7 +74,9 @@ export default function Schedule() {
 				) : typeof currentSchoolDay == 'number' ? (
 					<div className="flex flex-col items-center gap-y-3">
 						<div className="w-full no-data">{t('noSchedule')}</div>
-						<button onClick={() => setPopup(true)} className="button-filled !bg-dark-2">
+						<button
+							onClick={() => setPopup(true)}
+							className="button-filled !bg-secondary">
 							{t('addSchedule')}
 						</button>
 					</div>

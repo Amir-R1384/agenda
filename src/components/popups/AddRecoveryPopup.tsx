@@ -150,8 +150,8 @@ export default function AddRecoveryPopup({
 									key={i}
 									htmlFor={i.toString()}
 									className={`px-5 text-center transition-[filter] border ${
-										inputs.days[i] && '!brightness-90'
-									} rounded cursor-pointer border-neutral-500 bg-popup text-dark-1 days-checkbox active:translate-y-px`}>
+										inputs.days[i] && 'brightness-90 dark:!brightness-150'
+									} rounded cursor-pointer border-neutral-500 bg-popup text-primary days-checkbox active:translate-y-px`}>
 									{i + 1}
 									<input
 										className="absolute appearance-none"
@@ -184,13 +184,13 @@ export default function AddRecoveryPopup({
 								clearErrors()
 								setVisible(false)
 							}}
-							className="flex-1 transition-all outline-spacing outline-hover">
+							className="flex-1 transition-all text-primary outline-spacing outline-hover">
 							{t('cancel')}
 						</button>
-						<div className="w-px py-5 bg-neutral-400"></div>
+						<div className="w-px py-5 bg-outline"></div>
 						<button
 							onClick={onSubmit}
-							className="flex-1 transition-all outline-spacing outline-hover">
+							className="flex-1 transition-all text-primary outline-spacing outline-hover">
 							{editMode ? t('save') : t('add')}
 						</button>
 					</div>

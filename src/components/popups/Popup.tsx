@@ -1,5 +1,5 @@
-import { Dispatch, ReactNode, SetStateAction, useState } from 'react'
-import { useEffect, useRef } from 'react'
+import { Dispatch, ReactNode, SetStateAction, useEffect, useRef, useState } from 'react'
+import { getAppearance } from '../../util'
 
 interface Props {
 	visible: boolean
@@ -11,6 +11,7 @@ interface Props {
 export default function Popout({ visible, setVisible, children, fullScreen = false }: Props) {
 	const popupRef = useRef<HTMLDivElement | null>(null)
 	const [removeBg, setRemoveBg] = useState(false)
+	const appearance = getAppearance()
 
 	useEffect(() => {
 		if (visible === false) {
@@ -34,9 +35,13 @@ export default function Popout({ visible, setVisible, children, fullScreen = fal
 		if (visible) {
 			setRemoveBg(false)
 
-			document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#7F7F7F')
+			document
+				.querySelector('meta[name="theme-color"]')
+				?.setAttribute('content', appearance === 'light' ? '#7F7F7F' : '#131313')
 		} else {
-			document.querySelector('meta[name="theme-color"]')?.setAttribute('content', 'white')
+			document
+				.querySelector('meta[name="theme-color"]')
+				?.setAttribute('content', appearance === 'light' ? 'white' : '#262626')
 			setTimeout(() => setRemoveBg(true), 500)
 		}
 	}, [visible])

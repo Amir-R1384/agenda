@@ -20,7 +20,7 @@ export default function CardContainer({
 	return (
 		<div className="w-full mb-5">
 			<div className="mb-1 flex-space-between">
-				<div className="w-full text-lg text-dark-1">{t(heading)}</div>
+				<div className="w-full text-lg text-primary">{t(heading)}</div>
 				{includeAddButton && (
 					<button onClick={callBack}>
 						<PlusOutline className="icon !w-7" />

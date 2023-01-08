@@ -15,7 +15,7 @@ export default function InstallGuide({ visible, setVisible }: Props) {
 
 	return (
 		<Popup visible={visible} setVisible={setVisible} fullScreen>
-			<div className="flex flex-col p-5 gap-y-2 text-dark-1">
+			<div className="flex flex-col p-5 gap-y-2 text-primary">
 				{browser === 'other' ? (
 					<div className="p-5 text-center">{t('wrongBrowser')}</div>
 				) : browser === 'iphone' ? (

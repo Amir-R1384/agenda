@@ -2,7 +2,8 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-	content: ['./src/**/*.tsx'],
+	content: ['./index.html', './src/**/*.tsx'],
+	darkMode: 'class',
 	theme: {
 		extend: {
 			backgroundImage: {
@@ -10,10 +11,10 @@ module.exports = {
 					'linear-gradient(165deg, #F5F5F5 0%, #EEEEEE 25%, #EEEEEE 50%, #EEEEEE 75%, #F5F5F5 100%)'
 			},
 			colors: {
-				'dark-1': colors.neutral['900'],
-				'dark-2': colors.neutral['600'],
-
-				popup: colors.neutral['200']
+				primary: 'var(--color-primary)',
+				secondary: 'var(--color-secondary)',
+				popup: 'var(--color-popup)',
+				outline: 'var(--color-outline)'
 			},
 			spacing: {
 				main: '12px'

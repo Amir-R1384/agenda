@@ -181,14 +181,14 @@ export default function AddHomeworkPopup({
 							min={today}
 							value={inputs.date}
 							onChange={e => setInputs(prev => ({ ...prev, date: e.target.value }))}
-							className={`flex-1 transition-all outline-spacing outline-hover ${
+							className={`flex-1 text-primary fill-primary transition-all outline-spacing outline-hover ${
 								errors.date && 'error'
 							}`}
 						/>
-						<div className="w-px py-5 bg-neutral-400"></div>
+						<div className="w-px py-5 bg-outline"></div>
 						<button
 							onClick={selectNextCourse}
-							className="flex-1 transition-all outline-spacing outline-hover">
+							className="flex-1 transition-all outline-spacing outline-hover text-primary">
 							{t('nextClass')}
 						</button>
 					</div>
@@ -212,7 +212,7 @@ export default function AddHomeworkPopup({
 							setInputs(prev => ({ ...prev, description: e.target.value }))
 						}
 						placeholder={`Description (${t('optional')})`}
-						className="w-full pr-5 border-b resize-y outline-spacing outline-hover border-neutral-400"
+						className="w-full pr-5 border-b rounded-none resize-y !border-outline outline-spacing outline-hover"
 						maxLength={200}
 						rows={3}
 					/>
@@ -228,13 +228,13 @@ export default function AddHomeworkPopup({
 								setVisible(false)
 								clearErrors()
 							}}
-							className="flex-1 transition-all outline-spacing outline-hover">
+							className="flex-1 transition-all text-primary outline-spacing outline-hover">
 							{t('cancel')}
 						</button>
-						<div className="w-px py-5 bg-neutral-400"></div>
+						<div className="w-px py-5 bg-outline"></div>
 						<button
 							onClick={checkInputs}
-							className="flex-1 transition-all outline-spacing outline-hover">
+							className="flex-1 transition-all outline-spacing outline-hover text-primary">
 							{editMode ? t('save') : t('add')}
 						</button>
 					</div>

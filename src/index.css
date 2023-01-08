@@ -10,10 +10,21 @@
 :root {
 	--header-height: env(safe-area-inset-top);
 	--footer-height: env(safe-area-inset-bottom);
+	--color-primary: rgb(23, 23, 23);
+	--color-secondary: rgb(82, 82, 82);
+	--color-popup: rgb(229, 229, 229);
+	--color-outline: rgb(163, 163, 163);
+}
+
+html.dark {
+	--color-primary: rgb(225, 225, 225);
+	--color-secondary: rgb(212, 212, 212);
+	--color-popup: rgb(40, 40, 40);
+	--color-outline: rgb(82, 82, 82);
 }
 
 body {
-	@apply bg-neutral-100;
+	@apply bg-neutral-100 dark:bg-neutral-900;
 	user-select: none;
 	-webkit-user-select: none;
 	-webkit-tap-highlight-color: transparent;
@@ -30,23 +41,23 @@ footer {
 	}
 
 	.button-filled {
-		@apply button bg-dark-1 border border-dark-1 transition-all text-white font-medium shadow-md rounded-md;
+		@apply button bg-primary border border-primary transition-all text-white dark:text-neutral-900 dark:bg-white font-medium shadow-md rounded-md;
 	}
 
 	.button-outline {
-		@apply button border border-dark-2 text-dark-2 transition-all font-medium  rounded-md;
+		@apply button border border-secondary text-secondary transition-all font-medium rounded-md;
 	}
 
 	.icon {
-		@apply text-dark-1 w-8 transition-all p-0.5 rounded-md cursor-pointer;
+		@apply text-primary w-8 transition-all p-0.5 rounded-md cursor-pointer;
 	}
 
 	.icon:active {
-		@apply scale-125 !bg-transparent;
+		@apply bg-neutral-100 dark:bg-neutral-700;
 	}
 
 	.card {
-		@apply bg-[rgb(248,248,248)] rounded-xl p-3 space-y-4 border border-neutral-300;
+		@apply bg-[rgb(248,248,248)] dark:bg-[rgb(40,40,40)] rounded-xl p-3 space-y-4 border border-neutral-300 dark:border-neutral-800;
 	}
 
 	.card.hover {
@@ -58,23 +69,23 @@ footer {
 	}
 
 	.card-sub {
-		@apply text-dark-2 text-xs;
+		@apply text-secondary text-xs;
 	}
 
 	.card-main {
-		@apply text-dark-1 text-xl font-medium;
+		@apply text-primary text-xl font-medium;
 	}
 
 	.form-title {
-		@apply text-xl mb-5 pt-5 pl-5  text-dark-1;
+		@apply text-xl mb-5 pt-5 pl-5  text-primary;
 	}
 
 	.form-label {
-		@apply text-lg text-dark-1 font-medium pl-5;
+		@apply text-lg text-primary font-medium pl-5;
 	}
 
 	.outline-container {
-		@apply border-y border-neutral-400 w-full bg-popup;
+		@apply border-y border-outline w-full bg-popup;
 	}
 
 	.outline-hover {
@@ -90,13 +101,18 @@ footer {
 	}
 
 	.tag {
-		@apply py-1 px-3 bg-neutral-300 text-neutral-500 inline rounded-md;
+		@apply py-1 px-3 bg-neutral-300 text-neutral-500 dark:bg-neutral-600 dark:text-neutral-300 inline rounded-md;
 	}
 
 	input,
 	textarea,
 	select {
-		@apply outline-none bg-transparent text-dark-1 placeholder-neutral-500;
+		@apply outline-none bg-transparent text-primary placeholder-neutral-500;
+	}
+
+	input::placeholder,
+	textarea::placeholder {
+		@apply text-neutral-500 dark:text-neutral-400;
 	}
 
 	@media (hover: hover) {
@@ -106,7 +122,7 @@ footer {
 		}
 
 		.icon:hover {
-			@apply bg-neutral-100;
+			@apply bg-neutral-100 dark:bg-neutral-700;
 		}
 
 		.outline-hover:hover {
@@ -157,7 +173,7 @@ footer {
 }
 
 .no-data {
-	@apply card !bg-neutral-200 text-neutral-500 text-center border-none max-w-screen-lg mx-auto;
+	@apply card !bg-neutral-200 dark:!bg-neutral-800 text-secondary text-center border-none max-w-screen-lg mx-auto;
 }
 
 .label {
