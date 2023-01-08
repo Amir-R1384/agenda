@@ -29,7 +29,7 @@ export default function DayInfo() {
 	}, [])
 
 	return (
-		<div className="text-sm uppercase">
+		<div className="text-sm uppercase text-primary">
 			{t(config.daysInWeek[dateInfo.day])}, {t(config.months[dateInfo.month])} {dateInfo.date}{' '}
 			-{' '}
 			<span className="font-medium">
