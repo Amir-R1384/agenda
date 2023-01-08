@@ -82,6 +82,7 @@ export default {
 		clickAddAndDone:
 			"Cliquez sur 'Ajouter' et l'application devrait être ajoutée à votre écran d'accueil",
 		// Other
+		announcement: "Mode sombre est finalement là! Allez dans les paramètres afin de l'activer.",
 		period: 'Période',
 		bavette: 'Bavette',
 		pastDueDate: 'Date de remise dépassée!',

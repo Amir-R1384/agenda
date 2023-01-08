@@ -2,16 +2,18 @@ import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { newsQuery, sanityClient } from '../api/sanity'
-import { homeworksAtom, loadingAtom, newsAtom } from '../atoms'
-import { CardContainer, Homework, Loading, News } from '../components'
+import { announcementAtom, homeworksAtom, loadingAtom, newsAtom } from '../atoms'
+import { Announcement, CardContainer, Homework, Loading, News } from '../components'
 import { convertToYMD } from '../util'
 
 export default function Home() {
 	const homeworks = useRecoilValue(homeworksAtom)
 	const loading = useRecoilValue(loadingAtom)
 	const [news, setNews] = useRecoilState(newsAtom)
+	const announcement = useRecoilValue(announcementAtom)
 	const { t } = useTranslation()
 
+	// Upcoming homeworks
 	const todayTimeStamp = new Date(convertToYMD(new Date())).valueOf()
 	const upcomingHomeworks = homeworks
 		.filter(homework => homework.timestamp > todayTimeStamp)
@@ -24,6 +26,7 @@ export default function Home() {
 		})
 		.slice(0, 4)
 
+	// News
 	useEffect(() => {
 		if (news === null) {
 			sanityClient.fetch(newsQuery).then(result => {
@@ -34,6 +37,7 @@ export default function Home() {
 
 	return (
 		<>
+			{announcement && <Announcement />}
 			<CardContainer heading="recentNews">
 				{news?.length ? (
 					<div className="custom-grid">

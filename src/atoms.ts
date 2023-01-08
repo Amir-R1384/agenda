@@ -1,4 +1,5 @@
 import { atom } from 'recoil'
+import config from './config'
 import { Homework, News, Recovery, Schedule, SchoolDay } from './types'
 
 export const schoolDayAtom = atom<SchoolDay>({
@@ -34,4 +35,11 @@ export const loadingAtom = atom({
 export const viewportAtom = atom<'mobile' | 'desktop'>({
 	key: 'viewportAtom',
 	default: 'mobile'
+})
+
+export const announcementAtom = atom({
+	key: 'announcementAtom',
+	default:
+		config.announcementIndex !==
+		Number(localStorage.getItem(`${config.appPrefix}-announcementIndex`))
 })

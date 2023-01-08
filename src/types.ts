@@ -26,6 +26,7 @@ export interface Meal {
 export interface Config {
 	appPrefix: string
 	times: string[]
+	announcementIndex: number
 	sanityProjectId: string
 	beginingDay: string
 	fallbackLng: string

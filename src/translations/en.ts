@@ -79,6 +79,7 @@ export default {
 		clickOn3Dots: 'Click on the 3 dots at the top right of your screen',
 		clickAddAndDone: "Click on 'Add' and the app should be installed on your home screen",
 		// Other
+		announcement: 'Dark mode is here! Go to settings to enable it.',
 		period: 'Period',
 		bavette: 'Bavette',
 		pastDueDate: 'Past due date!',

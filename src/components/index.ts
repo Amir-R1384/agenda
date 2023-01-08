@@ -1,4 +1,5 @@
 export { default as Accordion } from './Accordion'
+export { default as Announcement } from './Announcement'
 export { default as CardContainer } from './CardContainer'
 export { default as Homework } from './cards/Homework'
 export { default as Menu } from './cards/Menu'

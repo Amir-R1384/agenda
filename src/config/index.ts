@@ -6,6 +6,8 @@ const config: Config = {
 	appPrefix: 'egenda',
 	beginingDay: '8/29/2022',
 
+	announcementIndex: 1,
+
 	sanityProjectId: 'sq5zpcem',
 	fallbackLng: 'en',
 	supportedLngs: ['en', 'fr'],
