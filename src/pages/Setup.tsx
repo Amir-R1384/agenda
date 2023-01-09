@@ -90,7 +90,7 @@ export default function Setup() {
 			</button>
 			<button
 				onClick={() => setInstallGuidePopup(true)}
-				className="button-outline bg-neutral-100">
+				className="button-outline bg-neutral-100 dark:bg-neutral-900">
 				{t('installMobileApp')}
 			</button>
 		</>
