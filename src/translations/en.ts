@@ -15,6 +15,7 @@ export default {
 		mondeEducF: 'World - Financial Education',
 		psychology: 'Psychology',
 		entrepreneurship: 'Entrepreneurship',
+		spanish: 'Spanish',
 		music: 'Music',
 		choir: 'Choir',
 		musicTheory: 'Music theory',
@@ -79,7 +80,7 @@ export default {
 		clickOn3Dots: 'Click on the 3 dots at the top right of your screen',
 		clickAddAndDone: "Click on 'Add' and the app should be installed on your home screen",
 		// Other
-		announcement: 'Dark mode is here! Go to settings to enable it.',
+		announcement: 'Spanish class has been added to the list of classes.',
 		period: 'Period',
 		bavette: 'Bavette',
 		pastDueDate: 'Past due date!',

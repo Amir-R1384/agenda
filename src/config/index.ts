@@ -6,7 +6,7 @@ const config: Config = {
 	appPrefix: 'egenda',
 	beginingDay: '8/29/2022',
 
-	announcementIndex: 1,
+	announcementIndex: 2,
 
 	sanityProjectId: 'sq5zpcem',
 	fallbackLng: 'en',
@@ -29,6 +29,7 @@ const config: Config = {
 		'mondeEducF',
 		'psychology',
 		'entrepreneurship',
+		'spanish',
 		'music',
 		'choir',
 		'musicTheory'
