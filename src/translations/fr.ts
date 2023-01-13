@@ -4,6 +4,7 @@ export default {
 		math: 'Mathématiques',
 		science: 'Science',
 		history: 'Histoire',
+		geography: 'Géographie',
 		french: 'Français',
 		dramaticArt: 'Art Dramatique',
 		plasticArt: 'Art Plastique',
@@ -15,6 +16,7 @@ export default {
 		mondeEducF: 'Monde - Éducation financière',
 		psychology: 'Psychologie',
 		entrepreneurship: 'Entrepreneuriat',
+		artMultiMedia: 'Art et multimedia',
 		espanish: 'Espagnol',
 		music: 'Musique',
 		choir: 'Chorale',
@@ -83,7 +85,7 @@ export default {
 		clickAddAndDone:
 			"Cliquez sur 'Ajouter' et l'application devrait être ajoutée à votre écran d'accueil",
 		// Other
-		announcement: "L'Espagnol a été ajouté à la liste des cours.",
+		announcement: 'La géographie et art et multimedia ont été ajoutés à la liste des cours.',
 		period: 'Période',
 		bavette: 'Bavette',
 		pastDueDate: 'Date de remise dépassée!',
