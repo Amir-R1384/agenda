@@ -75,6 +75,8 @@ export default {
 		optional: 'Optional',
 		homeworkDescription: 'Homework description...',
 		periodOrSubject: 'Period or subject...',
+		// Alerts
+		noScheduleAlert: 'Your schedule is empty for that day. Go to settings to add your courses.',
 		// Popup related
 		wrongBrowser: 'Open the site on your mobile phone and follow the instrcutions there',
 		clickOnShare: 'Click on the share button',

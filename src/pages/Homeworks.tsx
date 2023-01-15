@@ -32,6 +32,13 @@ export default function Homeworks() {
 
 			const schoolDay = getSchoolDay(dateObj)
 
+			// Making sure the user's schedule isn't empty for that day
+			if (schedule[(schoolDay as number) - 1].every(el => el == null)) {
+				setLoading(false)
+				alert(t('noScheduleAlert'))
+				return
+			}
+
 			let period: number, subject: string | undefined
 
 			if (/\d/.test(periodOrSubject)) {

@@ -77,6 +77,9 @@ export default {
 		optional: 'Optionnel',
 		homeworkDescription: 'Description du devoir...',
 		periodOrSubject: 'Période ou matière...',
+		// Alerts
+		noScheduleAlert:
+			"Votre horaire est vide pour ce jour-là. Allez aux paramètres afin d'ajouter vos cours.",
 		// Popup related
 		wrongBrowser: 'Ouvrez le site sur votre cellulaire et suivez les instructions la-bas',
 		clickOnShare: 'Cliquez sur le bouton de partager',
