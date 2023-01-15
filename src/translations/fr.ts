@@ -93,6 +93,7 @@ export default {
 		bavette: 'Bavette',
 		pastDueDate: 'Date de remise dépassée!',
 		problem: 'Il y a eu un problème! Veuillez ressayer plus tard',
+		signedInAs: 'Connecté en tant que',
 		a_m: 'un',
 		a_f: 'une',
 		// Homepage

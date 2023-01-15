@@ -53,6 +53,10 @@ export default function Settings({ style, className }: Props) {
 					className="button-filled !bg-red-500 !text-white !border-red-500">
 					{t('signOut')}
 				</button>
+				<div className="text-sm text-center opacity-75 text-secondary sm:text-base">
+					{t('signedInAs')}{' '}
+					<span className="font-semibold">{auth.currentUser?.email}</span>
+				</div>
 			</div>
 
 			<SchedulePopup visible={schedulePopup} setVisible={setSchedulePopup} />

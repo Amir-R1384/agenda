@@ -89,6 +89,7 @@ export default {
 		bavette: 'Bavette',
 		pastDueDate: 'Past due date!',
 		problem: 'Something went wrong! Please try again later',
+		signedInAs: 'Signed in as',
 		a_m: 'a',
 		a_f: 'a',
 		// Homepage
