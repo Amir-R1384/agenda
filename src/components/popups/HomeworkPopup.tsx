@@ -64,7 +64,7 @@ export default function HomeworkPopup({ visible, setVisible, homeworkInfo, onEdi
 
 			{/* Description */}
 			{description && (
-				<div className="outline-container !border-t-0 outline-spacing text-secondary !py-4">
+				<div className="outline-container !border-t-0 outline-spacing text-secondary !py-4 whitespace-pre">
 					{description}
 				</div>
 			)}
