@@ -1,5 +1,5 @@
 import { ChevronLeftOutline, ChevronRightOutline } from '@graywolfai/react-heroicons'
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRecoilValue } from 'recoil'
 import { loadingAtom, scheduleAtom } from '../atoms'
@@ -19,7 +19,7 @@ export default function Schedule() {
 	const currentSchoolDay = getSchoolDay(currentDate)
 	const [periods, setPeriods] = useState<PeriodState>([])
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		setPeriods(
 			typeof currentSchoolDay === 'number' &&
 				schedule[currentSchoolDay - 1]?.some(el => el !== null)
