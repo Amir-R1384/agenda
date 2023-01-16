@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import Div100vh from 'react-div-100vh'
 import { Route, Routes } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
@@ -7,6 +7,8 @@ import Main from './Main'
 import { Cafeteria, Home, Homeworks, Recoveries, Schedule, Setup } from './pages'
 import './translations'
 import { getAppearance } from './util'
+
+const swUrl = `${location.origin}/sw.js`
 
 export default function App() {
 	const setViewport = useSetRecoilState(viewportAtom)
@@ -33,6 +35,29 @@ export default function App() {
 		window.addEventListener('resize', listener)
 
 		return () => window.removeEventListener('resize', listener)
+	}, [])
+
+	useEffect(() => {
+		const registerServiceWorker = async () => {
+			if ('serviceWorker' in navigator) {
+				try {
+					const registration = await navigator.serviceWorker.register(swUrl, {
+						scope: '/'
+					})
+					if (registration.installing) {
+						console.log('Service worker installing')
+					} else if (registration.waiting) {
+						console.log('Service worker installed')
+					} else if (registration.active) {
+						console.log('Service worker active')
+					}
+				} catch (error) {
+					console.error(`Registration failed with ${error}`)
+				}
+			}
+		}
+
+		registerServiceWorker()
 	}, [])
 
 	return (

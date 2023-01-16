@@ -1,9 +1,26 @@
 {
 	"short_name": "Egenda",
 	"name": "Egenda",
-	"start_url": "/",
+	"start_url": "https://egenda.app",
 	"display": "standalone",
-	"scope": "/",
+	"scope": "https://egenda.app/",
 	"theme_color": "white",
-	"description": "Electronic agenda for Pierre-Laporte highschool"
+	"description": "Electronic agenda for Pierre-Laporte highschool",
+	"icons": [
+		{
+			"src": "https://egenda.app/icon-192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "https://egenda.app/icon-512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		},
+		{
+			"src": "https://egenda.app/icon-64.png",
+			"sizes": "64x64",
+			"type": "image/png"
+		}
+	]
 }
